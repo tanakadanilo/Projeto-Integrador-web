@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://java.sun.com/ui">
+<h:form>
+	<h:panelGrid columns="2">
+		<h:outputText value="Nome" />
+		<h:inputText id="nome" />
+
+		<h:outputText value="CPF" />
+		<h:inputSecret id="cpf" />
+
+		<h:outputText value="Endereço" />
+		<h:inputSecret id="endereco" />
+
+		<h:outputText value="Bairro" />
+		<h:inputSecret id="bairro" />
+
+		<h:outputText value="CEP" />
+		<h:inputSecret id="cep" />
+
+		<h:outputText value="Municipio" />
+		<h:inputSecret id="municipio" />
+
+		<h:outputText value="Telefone" />
+		<h:inputSecret id="telefone" />
+
+		<h:outputText value="Whatsapp" />
+		<h:selectBooleanCheckbox value="whatsapp" />
+
+		<h:outputText value="Funcionario" />
+		<h:selectBooleanCheckbox value="funcionario" />
+
+
+	</h:panelGrid>
+	<h:commandButton value="Salvar" />
+</h:form>
+</html>
