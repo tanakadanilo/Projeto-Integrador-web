@@ -1,5 +1,8 @@
 package bancodedados.model;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Modelo extends ModelBanco {
 
 	private String nome;
