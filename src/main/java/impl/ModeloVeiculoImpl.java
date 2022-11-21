@@ -1,11 +1,8 @@
 package impl;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import bancodedados.model.Modelo;
-
 
 public class ModeloVeiculoImpl {
 

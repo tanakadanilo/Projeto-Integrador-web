@@ -1,6 +1,9 @@
 package bancodedados.model;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Pessoa extends ModelBanco {
@@ -10,6 +13,9 @@ public class Pessoa extends ModelBanco {
 	private String endereco;
 	private String bairro;
 	private String cep;
+
+	@ManyToOne
+	@JoinColumn(name = "idMunicipio")
 	private Municipio idMunicipio;
 	private String telefone;
 	private boolean whatsapp;
