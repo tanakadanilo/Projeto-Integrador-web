@@ -1,0 +1,25 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	<p:menubar>
+		<p:submenu label="Cadastro" icon="pi pi-fw pi-file">
+			<p:menuitem value="Home" icon="pi pi-fw pi-home" outcome="home" />
+			<p:menuitem value="Modelo" icon="pi pi-fw pi-pencil" outcome="modelo" />
+		</p:submenu>
+		<p:submenu label="Ordem de Serviço" icon="pi pi-fw pi-file">
+			<p:menuitem value="Nova" icon="pi pi-fw pi-home"
+				outcome="ordem_servico" />
+			<p:menuitem value="Listar" icon="pi pi-fw pi-pencil"
+				outcome="ordem_servico_lista" />
+		</p:submenu>
+		<p:submenu label="Pessoa" icon="pi pi-fw pi-file">
+			<p:menuitem value="Nova" icon="pi pi-fw pi-home"
+				outcome="ordem_servico" />
+			<p:menuitem value="Listar" icon="pi pi-fw pi-pencil"
+				outcome="ordem_servico_lista" />
+		</p:submenu>
+
+	</p:menubar>
+</ui:composition>
