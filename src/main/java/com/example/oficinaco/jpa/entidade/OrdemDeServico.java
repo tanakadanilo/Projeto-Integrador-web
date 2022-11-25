@@ -16,7 +16,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-public class OrdemServico {
+public class OrdemDeServico {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,11 +33,11 @@ public class OrdemServico {
 	
 	@OneToMany
 	@JoinColumn(name="ordem_servico_id")
-	private List<OrdemServicoServico> servicos = new ArrayList<>();
+	private List<OrdemDeServicoServico> servicos = new ArrayList<>();
 
 	@OneToMany
 	@JoinColumn(name="ordem_servico_id")
-	private List<OrdemServicoProduto> produtos = new ArrayList<>();
+	private List<OrdemDeServicoProduto> produtos = new ArrayList<>();
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date data;
@@ -61,7 +61,7 @@ public class OrdemServico {
 
 	public BigDecimal getTotalServicos() {
 		BigDecimal vlr = BigDecimal.ZERO;
-		for(OrdemServicoServico oss : servicos) {
+		for(OrdemDeServicoServico oss : servicos) {
 			vlr = vlr.add(oss.getTotal());
 		}
 		return vlr;
@@ -155,11 +155,11 @@ public class OrdemServico {
 		this.desconto = desconto;
 	}
 
-	public List<OrdemServicoServico> getServicos() {
+	public List<OrdemDeServicoServico> getServicos() {
 		return servicos;
 	}
 
-	public List<OrdemServicoProduto> getProdutos() {
+	public List<OrdemDeServicoProduto> getProdutos() {
 		return produtos;
 	}
 

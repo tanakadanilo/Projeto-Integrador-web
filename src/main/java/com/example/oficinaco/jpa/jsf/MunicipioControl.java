@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.example.oficinaco.jpa.dao.MunicipioDao;
+import com.example.oficinaco.jpa.entidade.Modelo;
 import com.example.oficinaco.jpa.entidade.Municipio;
 
 @Component
@@ -29,7 +30,9 @@ public class MunicipioControl {
 	}
 
 	public void salvar() {
-
+		municipioDao.save(municipio);
+		municipio = new Municipio();
+		listar();
 	}
 
 	public void listar() {

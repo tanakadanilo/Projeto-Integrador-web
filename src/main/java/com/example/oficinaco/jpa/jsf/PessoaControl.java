@@ -18,9 +18,7 @@ public class PessoaControl {
 
 	@Autowired
 	private PessoaDao PessoaDao;
-
 	private Pessoa Pessoa = new Pessoa();
-
 	private List<Pessoa> Pessoas = new ArrayList<>();
 
 	@PostConstruct
@@ -49,6 +47,14 @@ public class PessoaControl {
 
 	public void setPessoa(Pessoa Pessoa) {
 		this.Pessoa = Pessoa;
+	}
+
+	public PessoaDao getPessoaDao() {
+		return PessoaDao;
+	}
+
+	public void setPessoaDao(PessoaDao pessoaDao) {
+		PessoaDao = pessoaDao;
 	}
 
 	public List<Pessoa> getPessoas() {

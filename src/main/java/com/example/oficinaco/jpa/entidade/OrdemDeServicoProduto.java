@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class OrdemServicoServico {
+public class OrdemDeServicoProduto {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,10 +22,6 @@ public class OrdemServicoServico {
 	
 	private BigDecimal preco;
 
-	public BigDecimal getTotal() {
-		return BigDecimal.valueOf(preco.doubleValue() * quantidade);
-	}
-	
 	public Integer getId() {
 		return id;
 	}

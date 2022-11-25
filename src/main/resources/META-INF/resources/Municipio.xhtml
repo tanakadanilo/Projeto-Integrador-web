@@ -39,7 +39,7 @@
 			showEffect="fade" closeOnEscape="true">
 			<p:panelGrid id="modeloDiag" columns="2">
 				<h:outputText value="Nome:" />
-				<p:inputText value="#{MunicipioControl.municipio.nome}" />
+				<p:inputText value="#{municipioControl.municipio.nome}" />
 				<h:outputText value="Código IBGE:" />
 				<p:inputText value="#{municipioControl.municipio.codigoIbge}" />
 				<h:outputText value="UF:" />
@@ -48,7 +48,7 @@
 
 			</p:panelGrid>
 
-			<p:commandButton value="Salvar" action="#{MunicipioControl.salvar}"
+			<p:commandButton value="Salvar" action="#{municipioControl.salvar}"
 				onclick="PF('formulario').close()" />
 
 		</p:dialog>
