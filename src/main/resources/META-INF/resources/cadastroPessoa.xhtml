@@ -9,8 +9,9 @@
 	<title>Hello, Spring and JSF World!</title>
 </h:head>
 <h:body>
-	<h:form id="form">
+	<h:form id="form" >
 		<ui:include src="menu.xhtml" />
+	<div style="height: 10px;"></div>
 		<p:commandButton value="Novo" type="button" icon="pi pi-external-link"
 			onclick="PF('formulario').show()" />
 		<p:dataTable id="lista" var="pessoa" value="#{pessoaControl.pessoas}" 

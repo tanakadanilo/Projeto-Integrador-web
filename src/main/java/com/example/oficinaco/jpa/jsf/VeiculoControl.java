@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 
+import com.example.oficinaco.jpa.dao.ModeloDao;
 import com.example.oficinaco.jpa.dao.VeiculoDao;
 import com.example.oficinaco.jpa.entidade.Modelo;
 import com.example.oficinaco.jpa.entidade.Veiculo;
@@ -21,7 +22,12 @@ public class VeiculoControl {
 
 	@Autowired
 	VeiculoDao veiculoDao;
+	@Autowired
+	ModeloDao modeloDao;
+	@Autowired
+	ModeloControl modeloControl;
 	Veiculo veiculo = new Veiculo();
+	Integer modeloId = 0;
 	List<Veiculo> veiculos = new ArrayList<>();
 
 	@PostConstruct
@@ -68,10 +74,20 @@ public class VeiculoControl {
 		this.veiculos = veiculos;
 	}
 
+	public Integer getModeloId() {
+		return modeloId;
+	}
+
+	public void setModeloId(Integer modeloId) {
+		this.modeloId = modeloId;
+	}
+
 	public List<Modelo> completeModelo(String nome) {
 		List<Modelo> modelos = new ArrayList<>();
-		for (Modelo veiculo : veiculoDao.completeModelo(nome)) {
-			modelos.add(veiculo);
+		var modelosCompletos = new ModeloControl().getModelos();
+		for (Modelo modelo : modelosCompletos) {
+			if (modelo.getNome().contains(nome))
+				modelos.add(modelo);
 		}
 
 		return modelos;

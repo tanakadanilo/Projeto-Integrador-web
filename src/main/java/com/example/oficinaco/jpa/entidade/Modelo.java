@@ -7,18 +7,18 @@ import javax.persistence.Id;
 
 @Entity
 public class Modelo {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
-	private String nome;
-	
+
+	private String nome = "";
+
 	private String marca;
-	
+
 	@Override
 	public String toString() {
-		return String.format("%s-%s", marca, nome);
+		return String.format("%s-%s", nome, marca);
 	}
 
 	public Integer getId() {
@@ -44,6 +44,5 @@ public class Modelo {
 	public void setMarca(String marca) {
 		this.marca = marca;
 	}
-	
-	
+
 }

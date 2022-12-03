@@ -14,21 +14,33 @@
 		<p:commandButton value="Novo" type="button" icon="pi pi-external-link"
 			onclick="PF('formulario').show()" />
 
-		<p:dataTable id="lista" var="modelo" value="#{modeloControl.modelos}"
-			allowUnsorting="true" sortMode="single">
-			<p:column sortBy="#{modelo.id}" headerText="Id">
-				<h:outputText value="#{modelo.id}" />
+		<p:dataTable id="lista" var="veiculo"
+			value="#{veiculoControl.veiculos}" allowUnsorting="true"
+			sortMode="single">
+			<p:column sortBy="#{veiculo.id}" headerText="Id">
+				<h:outputText value="veiculo.id" />
 			</p:column>
-			<p:column sortBy="#{modelo.nome}" headerText="Nome">
-				<h:outputText value="#{modelo.nome}" />
+			<p:column sortBy="#{veiculo.placa}" headerText="Placa">
+				<h:outputText value="#{veiculo.placa}" />
 			</p:column>
-			<p:column sortBy="#{modelo.marca}" headerText="Marca">
-				<h:outputText value="#{modelo.marca}" />
+			<p:column sortBy="#{veiculo.modelo.nome}" headerText="Modelo">
+				<h:outputText value="#{veiculo.modelo.nome}" />
+			</p:column>
+			<p:column sortBy="#{veiculo.anoModelo}" headerText="Ano do Modelo">
+				<h:outputText value="#{veiculo.anoModelo}" />
+			</p:column>
+			<p:column sortBy="#{veiculo.km}" headerText="KM">
+				<h:outputText value="#{veiculo.km}" />
+			</p:column>
+			<p:column sortBy="#{veiculo.ano}" headerText="Ano">
+				<h:outputText value="#{veiculo.ano}" />
 			</p:column>
 			<p:column headerText="">
 				<p:commandButton icon="pi pi-pencil" update="form:modeloDiag"
 					action="#{modeloControl.setModelo(modelo)}"
 					onclick="PF('formulario').show()" value="Editar" />
+			</p:column>
+			<p:column>
 				<p:commandButton icon="pi pi-trash" update="form:lista"
 					action="#{modeloControl.excluir(modelo.id)}"
 					style="margin-left: 10px;" value="Excluir" />
@@ -40,16 +52,27 @@
 
 				<p:outputLabel>Modelo
 				</p:outputLabel>
-				<p:autoComplete id="modelo"
-					value="#{veiculoControl.veiculo.modelo.nome}" style="width: 100%"
-					completeMethod="#{veiculoControl.completeModelo}" var="modelo"
-					itemLabel="#{modelo.nome}" itemValue="#{modelo}"
-					forceSelection="true" scrollHeight="250" />
+				<p:autoComplete id="modelo" value="#{veiculoControl.veiculo.modelo}"
+					style="width: 100%"
+					completeMethod="#{modeloControl.completeModelo}"
+					forceSelection="true" scrollHeight="250"
+					converter="#{modeloConverter}" />
 
-
+				<p:outputLabel>Placa
+				</p:outputLabel>
+				<p:inputText value="#{veiculoControl.veiculo.placa}"></p:inputText>
+				<p:outputLabel>KM
+				</p:outputLabel>
+				<p:inputText value="#{veiculoControl.veiculo.km}"></p:inputText>
+				<p:outputLabel>Ano
+				</p:outputLabel>
+				<p:inputText value="#{veiculoControl.veiculo.ano}"></p:inputText>
+				<p:outputLabel>Ano do Modelo
+				</p:outputLabel>
+				<p:inputText value="#{veiculoControl.veiculo.anoModelo}"></p:inputText>
 			</p:panelGrid>
 
-			<p:commandButton value="Salvar" action="#{modeloControl.salvar}"
+			<p:commandButton value="Salvar" action="#{veiculoControl.salvar}"
 				onclick="PF('formulario').close()" />
 
 		</p:dialog>
