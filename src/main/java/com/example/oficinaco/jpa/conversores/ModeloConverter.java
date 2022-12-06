@@ -4,6 +4,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
+import javax.faces.convert.FacesConverter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -12,8 +13,7 @@ import com.example.oficinaco.jpa.dao.ModeloDao;
 import com.example.oficinaco.jpa.entidade.Modelo;
 import com.example.oficinaco.jpa.jsf.ModeloControl;
 
-@Component
-@SessionScoped
+@FacesConverter(value = "modeloConverter", forClass = Modelo.class)
 public class ModeloConverter implements Converter {
 
 	@Autowired
@@ -24,7 +24,9 @@ public class ModeloConverter implements Converter {
 		if (value == null) {
 			return null;
 		}
-		return modeloControl.buscar(value);
+		String nomeModelo = value.substring(0, value.indexOf("-")).trim();
+		String nomeMarca = value.substring(value.indexOf("-")).trim();
+		return modeloControl.buscar(nomeModelo, nomeMarca);
 	}
 
 	@Override
@@ -33,7 +35,7 @@ public class ModeloConverter implements Converter {
 			return null;
 		}
 		Modelo modelo = (Modelo) value;
-		return modelo.getNome();
+		return modelo.getNome() + " - " + modelo.getMarca();
 	}
 
 }

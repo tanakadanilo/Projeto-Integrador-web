@@ -27,7 +27,7 @@ public class VeiculoControl {
 	@Autowired
 	ModeloControl modeloControl;
 	Veiculo veiculo = new Veiculo();
-	Integer modeloId = 0;
+	Integer modeloId;
 	List<Veiculo> veiculos = new ArrayList<>();
 
 	@PostConstruct
@@ -36,6 +36,10 @@ public class VeiculoControl {
 	}
 
 	public void salvar() {
+		if (veiculo.getModelo() == null) {// * modelo não salvo
+			System.out.println("ID do modelo: " + modeloId);
+			veiculo.setModelo(modeloDao.findById(modeloId).get());
+		}
 		veiculoDao.save(veiculo);
 		veiculo = new Veiculo();
 		listar();
@@ -93,4 +97,19 @@ public class VeiculoControl {
 		return modelos;
 	}
 
+	public void updateModelo(String nomeModelo) {
+		String nome = "";
+		String marca = "";
+		try {
+			nome = nomeModelo.substring(0, nomeModelo.indexOf("-")).trim();
+			marca = nomeModelo.substring(nomeModelo.indexOf("-")).trim();
+			Modelo modelo = modeloControl.buscar(nome, marca);
+			this.veiculo.setModelo(modelo);
+		} catch (Exception e) {
+			System.out.println("modelo: " + nomeModelo);
+			System.out.println("nome: " + nome);
+			System.out.println("marca: " + marca);
+			e.printStackTrace();
+		}
+	}
 }

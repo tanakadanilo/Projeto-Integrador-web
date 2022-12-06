@@ -41,9 +41,9 @@ public class ModeloControl {
 		System.out.println(getModelos());
 	}
 
-	public Modelo buscar(String nome) {
+	public Modelo buscar(String nomeModelo, String nomeMarca) {
 		for (Modelo modelo : modelos) {// * procurando modelo com este nome
-			if (modelo.getNome().equalsIgnoreCase(nome)) {
+			if (modelo.getNome().equalsIgnoreCase(nomeModelo) && modelo.getMarca().equalsIgnoreCase(nomeMarca)) {
 				return modelo;
 			}
 		}

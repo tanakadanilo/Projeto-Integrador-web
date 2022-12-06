@@ -37,12 +37,12 @@
 			</p:column>
 			<p:column headerText="">
 				<p:commandButton icon="pi pi-pencil" update="form:modeloDiag"
-					action="#{modeloControl.setModelo(modelo)}"
+					action="#{veiculoControl.setVeiculo(veiculo)}"
 					onclick="PF('formulario').show()" value="Editar" />
 			</p:column>
 			<p:column>
 				<p:commandButton icon="pi pi-trash" update="form:lista"
-					action="#{modeloControl.excluir(modelo.id)}"
+					action="#{veiculoControl.excluir(veiculo.id)}"
 					style="margin-left: 10px;" value="Excluir" />
 			</p:column>
 		</p:dataTable>
@@ -52,11 +52,14 @@
 
 				<p:outputLabel>Modelo
 				</p:outputLabel>
-				<p:autoComplete id="modelo" value="#{veiculoControl.veiculo.modelo}"
+				<p:autoComplete id="modelo" var="nomeModelo"
+					itemLabel="#{nomeModelo}"
+					itemValue="#{veiculoControl.veiculo.modelo}" value="#{nomeModelo}"
 					style="width: 100%"
 					completeMethod="#{modeloControl.completeModelo}"
 					forceSelection="true" scrollHeight="250"
-					converter="#{modeloConverter}" />
+					requiredMessage="O modelo do veículo deve ser informado"
+					onkeyup="if(event.keyCode==13){#{veiculoControl.updateModelo(nomeModelo)}}" />
 
 				<p:outputLabel>Placa
 				</p:outputLabel>
