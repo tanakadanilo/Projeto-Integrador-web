@@ -1,5 +1,7 @@
 package com.example.oficinaco.jpa.entidade;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,18 +14,18 @@ public class Veiculo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	@ManyToOne
 	private Modelo modelo;
-	
+
 	private Integer ano;
-	
+
 	private Integer anoModelo;
-	
+
 	private Integer km;
-	
+
 	private String placa;
-	
+
 	@Override
 	public String toString() {
 		return String.format("%s %d %d Km", modelo, ano, km);
@@ -76,7 +78,7 @@ public class Veiculo {
 	public void setPlaca(String placa) {
 		this.placa = placa;
 	}
+
 	
-	
-	
+
 }

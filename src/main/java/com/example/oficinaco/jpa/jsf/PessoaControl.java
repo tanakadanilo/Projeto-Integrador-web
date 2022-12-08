@@ -65,4 +65,12 @@ public class PessoaControl {
 		this.Pessoas = Pessoas;
 	}
 
+	public List<Pessoa> completePessoa(String nome) {
+		return PessoaDao.listarPorNome(nome);
+	}
+
+	public List<Pessoa> completeFuncionario(String nome) {
+		return PessoaDao.listarFuncionarioPorNome(nome);
+	}
+
 }

@@ -85,6 +85,9 @@ public class VeiculoControl {
 	public void setModeloId(Integer modeloId) {
 		this.modeloId = modeloId;
 	}
+public List<Veiculo> completeVeiculo(String placa) {
+		return veiculoDao.completeVeiculo(placa);
+	}
 
 	public List<Modelo> completeModelo(String nome) {
 		List<Modelo> modelos = new ArrayList<>();

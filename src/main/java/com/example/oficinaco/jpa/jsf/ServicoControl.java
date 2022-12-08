@@ -65,4 +65,8 @@ public class ServicoControl {
 		this.servicos = servicos;
 	}
 
+	public List<Servico> completeServico(String nome) {
+		return servicoDao.listarPorNome(nome);
+	}
+
 }
