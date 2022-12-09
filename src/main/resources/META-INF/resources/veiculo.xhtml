@@ -6,7 +6,7 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
 <h:head>
-	<title>Hello, Spring and JSF World!</title>
+	<title>Veículo</title>
 </h:head>
 <h:body>
 	<h:form id="form">
@@ -18,7 +18,7 @@
 			value="#{veiculoControl.veiculos}" allowUnsorting="true"
 			sortMode="single">
 			<p:column sortBy="#{veiculo.id}" headerText="Id">
-				<h:outputText value="veiculo.id" />
+				<h:outputText value="#{veiculo.id}" />
 			</p:column>
 			<p:column sortBy="#{veiculo.placa}" headerText="Placa">
 				<h:outputText value="#{veiculo.placa}" />
@@ -52,15 +52,13 @@
 
 				<p:outputLabel>Modelo
 				</p:outputLabel>
-				<p:autoComplete id="modelo" var="nomeModelo"
-					itemLabel="#{nomeModelo}"
-					itemValue="#{veiculoControl.veiculo.modelo}" value="#{nomeModelo}"
+				<p:autoComplete id="modelo" value="#{veiculoControl.veiculo.modelo}" 
+					completeMethod="#{modeloControl.completeModelo}" var="modelo"
+					itemValue="#{modelo}" itemLabel="#{modelo.nome}" 
 					style="width: 100%"
-					completeMethod="#{modeloControl.completeModelo}"
 					forceSelection="true" scrollHeight="250"
 					requiredMessage="O modelo do veículo deve ser informado"
-					onkeyup="if(event.keyCode==13){#{veiculoControl.updateModelo(nomeModelo)}}" />
-
+					converter="converter"></p:autoComplete>
 				<p:outputLabel>Placa
 				</p:outputLabel>
 				<p:inputText value="#{veiculoControl.veiculo.placa}"></p:inputText>

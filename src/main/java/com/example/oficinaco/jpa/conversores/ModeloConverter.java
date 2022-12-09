@@ -1,19 +1,16 @@
 package com.example.oficinaco.jpa.conversores;
 
-import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
-import com.example.oficinaco.jpa.dao.ModeloDao;
 import com.example.oficinaco.jpa.entidade.Modelo;
 import com.example.oficinaco.jpa.jsf.ModeloControl;
 
-@FacesConverter(value = "modeloConverter", forClass = Modelo.class)
+@FacesConverter(value = "modeloConverter")
 public class ModeloConverter implements Converter {
 
 	@Autowired

@@ -1,7 +1,6 @@
 package com.example.oficinaco.jpa.jsf;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -9,7 +8,6 @@ import javax.faces.bean.SessionScoped;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.ui.Model;
 
 import com.example.oficinaco.jpa.dao.ModeloDao;
 import com.example.oficinaco.jpa.dao.VeiculoDao;
@@ -21,14 +19,17 @@ import com.example.oficinaco.jpa.entidade.Veiculo;
 public class VeiculoControl {
 
 	@Autowired
-	VeiculoDao veiculoDao;
+	private VeiculoDao veiculoDao;
+	
 	@Autowired
-	ModeloDao modeloDao;
+	private ModeloDao modeloDao;
+	
 	@Autowired
-	ModeloControl modeloControl;
-	Veiculo veiculo = new Veiculo();
-	Integer modeloId;
-	List<Veiculo> veiculos = new ArrayList<>();
+	private ModeloControl modeloControl;
+	
+	private Veiculo veiculo = new Veiculo();
+	
+	private List<Veiculo> veiculos = new ArrayList<>();
 
 	@PostConstruct
 	public void init() {
@@ -36,10 +37,6 @@ public class VeiculoControl {
 	}
 
 	public void salvar() {
-		if (veiculo.getModelo() == null) {// * modelo não salvo
-			System.out.println("ID do modelo: " + modeloId);
-			veiculo.setModelo(modeloDao.findById(modeloId).get());
-		}
 		veiculoDao.save(veiculo);
 		veiculo = new Veiculo();
 		listar();
@@ -78,12 +75,14 @@ public class VeiculoControl {
 		this.veiculos = veiculos;
 	}
 
+
 	public Integer getModeloId() {
 		return modeloId;
 	}
 
 	public void setModeloId(Integer modeloId) {
 		this.modeloId = modeloId;
+
 	}
 
 	public List<Modelo> completeModelo(String nome) {
@@ -97,19 +96,19 @@ public class VeiculoControl {
 		return modelos;
 	}
 
-	public void updateModelo(String nomeModelo) {
-		String nome = "";
-		String marca = "";
-		try {
-			nome = nomeModelo.substring(0, nomeModelo.indexOf("-")).trim();
-			marca = nomeModelo.substring(nomeModelo.indexOf("-")).trim();
-			Modelo modelo = modeloControl.buscar(nome, marca);
-			this.veiculo.setModelo(modelo);
-		} catch (Exception e) {
-			System.out.println("modelo: " + nomeModelo);
-			System.out.println("nome: " + nome);
-			System.out.println("marca: " + marca);
-			e.printStackTrace();
-		}
-	}
+//	public void updateModelo(String nomeModelo) {
+//		String nome = "";
+//		String marca = "";
+//		try {
+//			nome = nomeModelo.substring(0, nomeModelo.indexOf("-")).trim();
+//			marca = nomeModelo.substring(nomeModelo.indexOf("-")).trim();
+//			Modelo modelo = modeloControl.buscar(nome, marca);
+//			this.veiculo.setModelo(modelo);
+//		} catch (Exception e) {
+//			System.out.println("modelo: " + nomeModelo);
+//			System.out.println("nome: " + nome);
+//			System.out.println("marca: " + marca);
+//			e.printStackTrace();
+//		}
+//	}
 }
