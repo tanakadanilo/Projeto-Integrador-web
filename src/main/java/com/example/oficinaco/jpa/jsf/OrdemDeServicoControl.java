@@ -22,7 +22,7 @@ import com.example.oficinaco.jpa.entidade.Veiculo;
 
 @Component
 @SessionScoped
-public class OrdemServicoControl {
+public class OrdemDeServicoControl {
 
 	private Integer pessoaId;
 	private Integer servicoId;
@@ -167,5 +167,14 @@ public class OrdemServicoControl {
 	public void setOrdemDeServicoServico(OrdemDeServicoServico ordemDeServicoServico) {
 		this.ordemDeServicoServico = ordemDeServicoServico;
 	}
+
+	public List<OrdemDeServico> getOrdensDeServicos() {
+		return ordensDeServicos;
+	}
+
+	public void setOrdensDeServicos(List<OrdemDeServico> ordensDeServicos) {
+		this.ordensDeServicos = ordensDeServicos;
+	}
+	
 
 }

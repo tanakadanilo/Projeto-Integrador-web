@@ -74,4 +74,7 @@ public class VeiculoControl {
 	public List<Modelo> completeModelo(String nome) {
 		return modeloControl.completeModelo(nome);
 	}
+	public List<Veiculo>completeVeiculo(String placa){
+		return veiculoDao.completeVeiculo(placa);
+	}
 }

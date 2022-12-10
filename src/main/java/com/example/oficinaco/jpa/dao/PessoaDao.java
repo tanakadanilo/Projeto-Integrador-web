@@ -10,12 +10,15 @@ import org.springframework.stereotype.Repository;
 import com.example.oficinaco.jpa.entidade.Pessoa;
 
 @Repository
-public interface PessoaDao extends JpaRepository<Pessoa, Integer>{
+public interface PessoaDao extends JpaRepository<Pessoa, Integer> {
 
 	@Query(nativeQuery = true, value = "select * from pessoa p where lower(p.nome) like lower(:nome)")
-	List<Pessoa> listarPorNome(@Param("nome") String nome);
-	
+	List<Pessoa> completePessoa(@Param("nome") String nome);
+
 	@Query(nativeQuery = true, value = "select * from pessoa p where p.funcionario and lower(p.nome) like lower(:nome)")
-	List<Pessoa> listarFuncionarioPorNome(@Param("nome") String nome);
-	
+	List<Pessoa> completeFuncionario(@Param("nome") String nome);
+
+	@Query(nativeQuery = true, value = "select * from pessoa p where not(p.funcionario) and lower(p.nome) like lower(:nome)")
+	List<Pessoa> completeCliente(@Param("nome") String nome);
+
 }

@@ -64,5 +64,9 @@ public class PessoaControl {
 	public void setPessoas(List<Pessoa> Pessoas) {
 		this.Pessoas = Pessoas;
 	}
+	
+	public List<Pessoa> completeCliente(String nome){
+		return PessoaDao.completeCliente(nome);
+	}
 
 }

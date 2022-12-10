@@ -21,52 +21,56 @@ public class OrdemDeServico {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	@ManyToOne(optional = false)
 	private Pessoa cliente;
-	
+
 	@ManyToOne(optional = false)
 	private Pessoa funcionario;
-	
+
 	@ManyToOne(optional = false)
 	private Veiculo veiculo;
-	
+
 	@OneToMany
-	@JoinColumn(name="ordem_servico_id")
+	@JoinColumn(name = "ordem_servico_id")
 	private List<OrdemDeServicoServico> servicos = new ArrayList<>();
 
 	@OneToMany
-	@JoinColumn(name="ordem_servico_id")
+	@JoinColumn(name = "ordem_servico_id")
 	private List<OrdemDeServicoProduto> produtos = new ArrayList<>();
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date data;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataEntrada;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataOs;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataInicioServico;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataFimServico;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataEntrega;
-	
-	private BigDecimal desconto;
+
+	private BigDecimal desconto = BigDecimal.ZERO;
 
 	public BigDecimal getTotalServicos() {
 		BigDecimal vlr = BigDecimal.ZERO;
-		for(OrdemDeServicoServico oss : servicos) {
+		for (OrdemDeServicoServico oss : servicos) {
 			vlr = vlr.add(oss.getTotal());
 		}
+		for (OrdemDeServicoProduto oss : produtos) {
+			vlr = vlr.add(oss.getPrecoTotal());
+		}
+		vlr = vlr.subtract(desconto);
 		return vlr;
 	}
-	
+
 	public Integer getId() {
 		return id;
 	}
@@ -163,5 +167,4 @@ public class OrdemDeServico {
 		return produtos;
 	}
 
-	
 }
