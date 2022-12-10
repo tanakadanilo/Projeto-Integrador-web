@@ -13,7 +13,7 @@
 
 		<ui:include src="menu.xhtml" />
 
-		<p:commandButton value="Novo" type="button" icon="pi pi-external-link"
+		<p:commandButton value="Nova Ordem de Serviço" type="button" icon="pi pi-external-link"
 			onclick="PF('formulario').show()" />
 
 		<p:dataTable id="lista" var="os"
@@ -49,9 +49,9 @@
 			</p:column>
 		</p:dataTable>
 
-		<p:dialog header="Ordem de Servico" widgetVar="formulario"
-			minHeight="40" showEffect="fade" closeOnEscape="true" width="1080" >
-			<p:panelGrid columns="4" layout="grid" >
+		<p:dialog header="Ordem de Serviço" widgetVar="formulario"
+			minHeight="40" showEffect="fade" closeOnEscape="true" width="1080">
+			<p:panelGrid columns="4" layout="grid">
 
 				<p:outputLabel value="Cliente" for="cliente"></p:outputLabel>
 				<p:autoComplete id="cliente"
@@ -83,7 +83,7 @@
 				<p:selectCheckboxMenu id="servicos"
 					value="#{servicoControl.servicos}" label="Serviços"
 					style="width: 15rem" filter="true" filterMatchMode="startsWith"
-					panelStyle="width: 15rem" scrollHeight="250" dynamic="true" >
+					panelStyle="width: 15rem" scrollHeight="250" dynamic="true">
 					<f:selectItems value="#{servicoControl.servicos}" />
 				</p:selectCheckboxMenu>
 
@@ -122,6 +122,9 @@
 				<p:inputText disabled="true"
 					value="#{ordemDeServicoControl.ordemDeServico.totalServicos}"></p:inputText>
 			</p:panelGrid>
+			<p:commandButton value="Salvar"
+				action="#{ordemDeServicoControl.salvar}"
+				onclick="PF('formulario').close()" />
 		</p:dialog>
 
 		<!--  A partir daqui, código do cesel, manter até decidir qual manter -->
