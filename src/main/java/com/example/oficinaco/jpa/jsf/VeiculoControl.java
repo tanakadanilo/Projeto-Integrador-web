@@ -20,15 +20,12 @@ public class VeiculoControl {
 
 	@Autowired
 	private VeiculoDao veiculoDao;
-	
-	@Autowired
-	private ModeloDao modeloDao;
-	
+
 	@Autowired
 	private ModeloControl modeloControl;
-	
+
 	private Veiculo veiculo = new Veiculo();
-	
+
 	private List<Veiculo> veiculos = new ArrayList<>();
 
 	@PostConstruct
@@ -75,40 +72,7 @@ public class VeiculoControl {
 		this.veiculos = veiculos;
 	}
 
-
-	public Integer getModeloId() {
-		return modeloId;
-	}
-
-	public void setModeloId(Integer modeloId) {
-		this.modeloId = modeloId;
-
-	}
-
 	public List<Modelo> completeModelo(String nome) {
-		List<Modelo> modelos = new ArrayList<>();
-		var modelosCompletos = new ModeloControl().getModelos();
-		for (Modelo modelo : modelosCompletos) {
-			if (modelo.getNome().contains(nome))
-				modelos.add(modelo);
-		}
-
-		return modelos;
+		return modeloControl.completeModelo(nome);
 	}
-
-//	public void updateModelo(String nomeModelo) {
-//		String nome = "";
-//		String marca = "";
-//		try {
-//			nome = nomeModelo.substring(0, nomeModelo.indexOf("-")).trim();
-//			marca = nomeModelo.substring(nomeModelo.indexOf("-")).trim();
-//			Modelo modelo = modeloControl.buscar(nome, marca);
-//			this.veiculo.setModelo(modelo);
-//		} catch (Exception e) {
-//			System.out.println("modelo: " + nomeModelo);
-//			System.out.println("nome: " + nome);
-//			System.out.println("marca: " + marca);
-//			e.printStackTrace();
-//		}
-//	}
 }
