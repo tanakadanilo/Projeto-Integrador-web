@@ -30,19 +30,29 @@
 			<p:column sortBy="#{produto.precoVenda}" headerText="Preço">
 				<h:outputText value="#{produto.precoVenda}" />
 			</p:column>
+			<p:column headerText="">
+				<p:commandButton icon="pi pi-pencil" update="form:modeloDiag"
+					action="#{produtoControl.setProduto(produto)}"
+					onclick="PF('formulario').show()" value="Editar" />
+			</p:column>
+			<p:column>
+				<p:commandButton icon="pi pi-trash" update="form:lista"
+					action="#{produtoControl.excluir(produto.id)}"
+					style="margin-left: 10px;" value="Excluir" />
+			</p:column>
 		</p:dataTable>
 
 		<p:dialog header="Serviço" widgetVar="formulario" minHeight="40"
 			showEffect="fade" closeOnEscape="true" width="1080">
-			<p:panelGrid columns="4" layout="grid">
+			<p:panelGrid id="modeloDiag" columns="6">
 
 				<p:outputLabel value="Nome:" for="nome"></p:outputLabel>
 				<p:inputText id="nome" value="#{produtoControl.produto.nome}"></p:inputText>
 
 				<p:outputLabel for="preco" value="Preço" />
-				<p:inputNumber id="preco" value="#{produtoControl.produto.precoVenda}"
-					symbol="R$ " symbolPosition="p" decimalSeparator=","
-					thousandSeparator="." />
+				<p:inputNumber id="preco"
+					value="#{produtoControl.produto.precoVenda}" symbol="R$ "
+					symbolPosition="p" decimalSeparator="," thousandSeparator="." />
 			</p:panelGrid>
 
 
