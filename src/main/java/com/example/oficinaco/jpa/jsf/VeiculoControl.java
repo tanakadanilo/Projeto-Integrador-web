@@ -17,9 +17,14 @@ import com.example.oficinaco.jpa.entidade.Veiculo;
 public class VeiculoControl {
 
 	@Autowired
-	VeiculoDao veiculoDao;
-	Veiculo veiculo = new Veiculo();
-	List<Veiculo> veiculos = new ArrayList<>();
+	private VeiculoDao veiculoDao;
+
+	@Autowired
+	private ModeloControl modeloControl;
+
+	private Veiculo veiculo = new Veiculo();
+
+	private List<Veiculo> veiculos = new ArrayList<>();
 
 	@PostConstruct
 	public void init() {
@@ -65,4 +70,7 @@ public class VeiculoControl {
 		this.veiculos = veiculos;
 	}
 
+	public List<Modelo> completeModelo(String nome) {
+		return modeloControl.completeModelo(nome);
+	}
 }

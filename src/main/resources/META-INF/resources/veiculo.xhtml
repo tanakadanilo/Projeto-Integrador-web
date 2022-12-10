@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+	<title>Veículo</title>
+</h:head>
+<h:body>
+	<h:form id="form">
+		<ui:include src="menu.xhtml" />
+		<p:commandButton value="Novo" type="button" icon="pi pi-external-link"
+			onclick="PF('formulario').show()" />
+
+		<p:dataTable id="lista" var="veiculo"
+			value="#{veiculoControl.veiculos}" allowUnsorting="true"
+			sortMode="single">
+			<p:column sortBy="#{veiculo.id}" headerText="Id">
+				<h:outputText value="#{veiculo.id}" />
+			</p:column>
+			<p:column sortBy="#{veiculo.placa}" headerText="Placa">
+				<h:outputText value="#{veiculo.placa}" />
+			</p:column>
+			<p:column sortBy="#{veiculo.modelo.nome}" headerText="Modelo">
+				<h:outputText value="#{veiculo.modelo.nome}" />
+			</p:column>
+			<p:column sortBy="#{veiculo.anoModelo}" headerText="Ano do Modelo">
+				<h:outputText value="#{veiculo.anoModelo}" />
+			</p:column>
+			<p:column sortBy="#{veiculo.km}" headerText="KM">
+				<h:outputText value="#{veiculo.km}" />
+			</p:column>
+			<p:column sortBy="#{veiculo.ano}" headerText="Ano">
+				<h:outputText value="#{veiculo.ano}" />
+			</p:column>
+			<p:column headerText="">
+				<p:commandButton icon="pi pi-pencil" update="form:modeloDiag"
+					action="#{veiculoControl.setVeiculo(veiculo)}"
+					onclick="PF('formulario').show()" value="Editar" />
+			</p:column>
+			<p:column>
+				<p:commandButton icon="pi pi-trash" update="form:lista"
+					action="#{veiculoControl.excluir(veiculo.id)}"
+					style="margin-left: 10px;" value="Excluir" />
+			</p:column>
+		</p:dataTable>
+		<p:dialog header="Pessoa" widgetVar="formulario" minHeight="40"
+			showEffect="fade" closeOnEscape="true">
+			<p:panelGrid id="modeloDiag" columns="6">
+
+				<p:outputLabel>Modelo
+				</p:outputLabel>
+				<p:autoComplete id="modelo" value="#{veiculoControl.veiculo.modelo}" 
+					completeMethod="#{modeloControl.completeModelo}" var="modelo"
+					itemValue="#{modelo}" itemLabel="#{modelo.nome}" 
+					style="width: 100%"
+					forceSelection="true" scrollHeight="250"
+					requiredMessage="O modelo do veículo deve ser informado"
+					converter="converter"></p:autoComplete>
+				<p:outputLabel>Placa
+				</p:outputLabel>
+				<p:inputText value="#{veiculoControl.veiculo.placa}"></p:inputText>
+				<p:outputLabel>KM
+				</p:outputLabel>
+				<p:inputText value="#{veiculoControl.veiculo.km}"></p:inputText>
+				<p:outputLabel>Ano
+				</p:outputLabel>
+				<p:inputText value="#{veiculoControl.veiculo.ano}"></p:inputText>
+				<p:outputLabel>Ano do Modelo
+				</p:outputLabel>
+				<p:inputText value="#{veiculoControl.veiculo.anoModelo}"></p:inputText>
+			</p:panelGrid>
+
+			<p:commandButton value="Salvar" action="#{veiculoControl.salvar}"
+				onclick="PF('formulario').close()" />
+
+		</p:dialog>
+
+	</h:form>
+</h:body>
+</html>
