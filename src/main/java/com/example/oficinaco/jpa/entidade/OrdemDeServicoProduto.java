@@ -18,6 +18,8 @@ public class OrdemDeServicoProduto {
 	@ManyToOne(optional = false)
 	private Servico servico;
 
+	private Produto produto;
+
 	private Integer quantidade;
 
 	private BigDecimal preco;
@@ -54,8 +56,12 @@ public class OrdemDeServicoProduto {
 		this.preco = preco;
 	}
 
-	public BigDecimal getPrecoTotal() {
-		return this.preco.multiply(BigDecimal.valueOf(this.quantidade));
+	public Produto getProduto() {
+		return produto;
+	}
+
+	public void setProduto(Produto produto) {
+		this.produto = produto;
 	}
 
 }

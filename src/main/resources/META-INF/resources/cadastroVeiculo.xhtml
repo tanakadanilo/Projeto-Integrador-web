@@ -43,27 +43,44 @@
 				<p:selectBooleanCheckbox value="veiculo.whatsapp" itemLabel="Basic" />
 
 				<p:column headerText="">
-					<!-- 				<p:commandButton icon="pi pi-pencil" update="form:veiculoDiag" action="#{veiculoControl.setveiculo(veiculo)}" onclick="PF('formulario').show()" value="Editar"/> -->
-					<!-- 				<p:commandButton icon="pi pi-trash" update="form:lista" action="#{veiculoControl.excluir(veiculo.id)}" style="margin-left: 10px;" value="Excluir"/> -->
+					<p:commandButton icon="pi pi-pencil" update="form:veiculoDiag"
+						action="#{veiculoControl.setVeiculo(veiculo)}"
+						onclick="PF('formulario').show()" value="Editar" />
+				</p:column>
+				<p:column headerText="">
+					<p:commandButton icon="pi pi-trash" update="form:lista"
+						action="#{veiculoControl.excluir(veiculo.id)}"
+						style="margin-left: 10px;" value="Excluir" />
 				</p:column>
 			</p:dataTable>
 		</div>
 		<p:dialog header="Veiculo" widgetVar="formulario" minHeight="40"
 			showEffect="fade" closeOnEscape="true">
 			<div style="margin-bottom: 20px">
-				<p:panelGrid id="modeloDiag" columns="6">
+				<p:panelGrid id="veiculoDiag" columns="6">
+					<p:outputLabel for="marca" value="Marca: "></p:outputLabel>
+					<p:autoComplete id="marca" value="#{veiculoControl.nomeMarca}"
+						completeMethod="#{modeloControl.completeMarca}" var="marca"
+						itemValue="#{marca}" itemLabel="#{marca}" style="width: 100%"
+						forceSelection="true" scrollHeight="250"
+						requiredMessage="A marca do veículo deve ser informada"></p:autoComplete>
 					<h:outputText value="Modelo:" />
-					<p:inputText value="#{veiculoControl.veiculo.modelo}" />
+					<p:autoComplete id="modelo"
+						value="#{veiculoControl.veiculo.modelo}"
+						completeMethod="#{modeloControl.completeModelo}" var="modelo"
+						itemValue="#{modelo.nome}" itemLabel="#{modelo.nome}"
+						style="width: 100%" forceSelection="true" scrollHeight="250"
+						requiredMessage="O modelo do veículo deve ser informado"
+						converter="converter"></p:autoComplete>
 					<h:outputText value="Ano:" />
-					<p:inputText value="#{veiculoControl.veiculo.ano}" />
+					<p:inputNumber id="ano" value="#{veiculoControl.veiculo.ano}" />
 					<h:outputText value="Placa:" />
 					<p:inputText value="#{veiculoControl.veiculo.placa}" />
 					<h:outputText value="Quilometragem:" />
-					<p:inputText value="#{veiculoControl.veiculo.km}" />
-					<h:outputText value="Ano do Modelo:" />
-					<p:inputText value="#{veiculoControl.veiculo.anoModelo}" />
-					<h:outputText value="Marca:" />
-					<p:inputText value="#{veiculoControl.veiculo.modelo.marca}" />
+					<p:inputNumber id="km" value="#{veiculoControl.veiculo.ano}" />
+					<h:outputLabel for="anoModelo" value="Ano do Modelo:" />
+					<p:inputNumber id="anoModelo"
+						value="#{veiculoControl.veiculo.anoModelo}" />
 
 
 				</p:panelGrid>

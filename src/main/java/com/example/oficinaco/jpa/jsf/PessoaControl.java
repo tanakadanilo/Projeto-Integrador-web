@@ -70,11 +70,13 @@ public class PessoaControl {
 	}
 
 	public List<Pessoa> completeCliente(String nome) {
-		return PessoaDao.completeCliente("%" + nome + "%");
+		var lista = PessoaDao.completePessoa("%" + nome + "%");
+		return lista.stream().filter(p -> !p.isFuncionario()).toList();
 	}
 
 	public List<Pessoa> completeFuncionario(String nome) {
-		return PessoaDao.completeFuncionario("%" + nome + "%");
+		var lista =  PessoaDao.completePessoa("%" + nome + "%");
+		return lista.stream().filter(p -> p.isFuncionario()).toList();
 	}
 
 }

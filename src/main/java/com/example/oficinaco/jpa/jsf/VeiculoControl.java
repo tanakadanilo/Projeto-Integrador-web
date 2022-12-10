@@ -27,6 +27,8 @@ public class VeiculoControl {
 
 	private List<Veiculo> veiculos = new ArrayList<>();
 
+	private String nomeMarca;
+
 	@PostConstruct
 	public void init() {
 		listar();
@@ -74,7 +76,17 @@ public class VeiculoControl {
 	public List<Modelo> completeModelo(String nome) {
 		return modeloControl.completeModelo(nome);
 	}
-	public List<Veiculo>completeVeiculo(String placa){
+
+	public List<Veiculo> completeVeiculo(String placa) {
 		return veiculoDao.completeVeiculo(placa);
 	}
+
+	public String getNomeMarca() {
+		return nomeMarca;
+	}
+
+	public void setNomeMarca(String nomeMarca) {
+		this.nomeMarca = nomeMarca;
+	}
+
 }

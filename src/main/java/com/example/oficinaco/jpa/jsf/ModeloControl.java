@@ -60,6 +60,19 @@ public class ModeloControl {
 	}
 
 	public List<Modelo> completeModelo(String nome) {
-		return modeloDao.completeModelo(nome);
+		return modeloDao.completeModelo("%" + nome + "%");
+	}
+
+	public List<String> completeMarca(String nome) {
+		List<String> marcas = new ArrayList<>();
+		if (modelos.isEmpty()) {
+			return marcas;
+		}
+		for (Modelo modelo : modelos) {
+			if (modelo.getMarca().toUpperCase().contains(nome.toUpperCase())) {
+				marcas.add(modelo.getMarca());
+			}
+		}
+		return marcas;
 	}
 }
