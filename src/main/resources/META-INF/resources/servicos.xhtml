@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<title>Servico</title>
+</h:head>
+<h:body>
+	<h:form id="form">
+
+		<ui:include src="menu.xhtml" />
+
+		<p:commandButton value="Novo Serviço" type="button" icon="pi pi-external-link"
+			onclick="PF('formulario').show()" />
+
+		<p:dataTable id="lista" var="servico"
+			value="#{servicoControl.servicos}" allowUnsorting="true"
+			sortMode="single">
+			<p:column sortBy="#{servico.id}" headerText="Id">
+				<h:outputText value="#{servico.id}" />
+			</p:column>
+
+			<p:column sortBy="#{servico.nome}" headerText="Nome">
+				<h:outputText value="#{servico.nome}" />
+			</p:column>
+
+			<p:column sortBy="#{servico.preco}" headerText="Preço">
+				<h:outputText value="#{servico.preco}" />
+			</p:column>
+		</p:dataTable>
+
+		<p:dialog header="Serviço" widgetVar="formulario"
+			minHeight="40" showEffect="fade" closeOnEscape="true" width="1080">
+			<p:panelGrid columns="4" layout="grid">
+
+				<p:outputLabel value="Nome:" for="nome"></p:outputLabel>
+				<p:inputText id="nome" value="#{servicoControl.servico.nome}"></p:inputText>
+
+				<p:outputLabel for="preco" value="Preço" />
+				<p:inputNumber id="preco" value="#{servicoControl.servico.preco}"
+					symbol="R$ " symbolPosition="p" decimalSeparator=","
+					thousandSeparator="." />
+			</p:panelGrid>
+			
+			
+			<p:commandButton value="Salvar" action="#{servicoControl.salvar}"
+				onclick="PF('formulario').close()" />
+		</p:dialog>
+	</h:form>
+</h:body>
+</html>
