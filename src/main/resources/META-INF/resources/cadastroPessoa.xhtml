@@ -11,65 +11,70 @@
 <h:body>
 	<h:form id="form">
 		<ui:include src="menu.xhtml" />
-		<p:commandButton value="Novo" type="button" icon="pi pi-external-link"
-			onclick="PF('formulario').show()" />
-		<p:dataTable id="lista" var="pessoa" value="#{pessoaControl.pessoas}" 
-			allowUnsorting="true" sortMode="single">
-			<p:column sortBy="#{pessoa.id}" headerText="Id">
-				<h:outputText value="#{pessoa.id}" />
-			</p:column>
-			<p:column sortBy="#{pessoa.nome}" headerText="Nome">
-				<h:outputText value="#{pessoa.nome}" />
-			</p:column>
-			<p:column sortBy="#{pessoa.cpf}" headerText="CPF">
-				<h:outputText value="#{pessoa.cpf}" />
-			</p:column>
-			<p:column sortBy="#{pessoa.endereco}" headerText="Endereco">
-				<h:outputText value="#{pessoa.endereco}" />
-			</p:column>
-			<p:column sortBy="#{pessoa.bairro}" headerText="Bairro">
-				<h:outputText value="#{pessoa.bairro}" />
-			</p:column>
-			<p:column sortBy="#{pessoa.cep}" headerText="CEP">
-				<h:outputText value="#{pessoa.cep}" />
-			</p:column>
-			<p:column sortBy="#{pessoa.municipio}" headerText="Municipio">
-				<h:outputText value="#{pessoa.municipio}" />
-			</p:column>
 
-			<p:column sortBy="#{pessoa.telefone}" headerText="Telefone">
-				<h:outputText value="#{pessoa.telefone}" />
-			</p:column>
+		<p:commandButton value="Adicionar Pessoa" type="button"
+			icon="pi pi-external-link" onclick="PF('formulario').show()" />
+		<div style="margin-top: 20px">
+			<p:dataTable id="lista" var="pessoa" value="#{pessoaControl.pessoas}"
+				allowUnsorting="true" sortMode="single">
+				<p:column sortBy="#{pessoa.id}" headerText="Id">
+					<h:outputText value="#{pessoa.id}" />
+				</p:column>
+				<p:column sortBy="#{pessoa.nome}" headerText="Nome">
+					<h:outputText value="#{pessoa.nome}" />
+				</p:column>
+				<p:column sortBy="#{pessoa.cpf}" headerText="CPF">
+					<h:outputText value="#{pessoa.cpf}" />
+				</p:column>
+				<p:column sortBy="#{pessoa.endereco}" headerText="Endereco">
+					<h:outputText value="#{pessoa.endereco}" />
+				</p:column>
+				<p:column sortBy="#{pessoa.bairro}" headerText="Bairro">
+					<h:outputText value="#{pessoa.bairro}" />
+				</p:column>
+				<p:column sortBy="#{pessoa.cep}" headerText="CEP">
+					<h:outputText value="#{pessoa.cep}" />
+				</p:column>
+				<p:column sortBy="#{pessoa.municipio}" headerText="Municipio">
+					<h:outputText value="#{pessoa.municipio}" />
+				</p:column>
 
-			<p:selectBooleanCheckbox value="pessoa.whatsapp" itemLabel="Basic" />
+				<p:column sortBy="#{pessoa.telefone}" headerText="Telefone">
+					<h:outputText value="#{pessoa.telefone}" />
+				</p:column>
 
-			<p:column headerText="">
-				<!-- 				<p:commandButton icon="pi pi-pencil" update="form:pessoaDiag" action="#{pessoaControl.setpessoa(pessoa)}" onclick="PF('formulario').show()" value="Editar"/> -->
-				<!-- 				<p:commandButton icon="pi pi-trash" update="form:lista" action="#{pessoaControl.excluir(pessoa.id)}" style="margin-left: 10px;" value="Excluir"/> -->
-			</p:column>
-		</p:dataTable>
+				<p:selectBooleanCheckbox value="pessoa.whatsapp" itemLabel="Basic" />
+
+				<p:column headerText="">
+					<!-- 				<p:commandButton icon="pi pi-pencil" update="form:pessoaDiag" action="#{pessoaControl.setpessoa(pessoa)}" onclick="PF('formulario').show()" value="Editar"/> -->
+					<!-- 				<p:commandButton icon="pi pi-trash" update="form:lista" action="#{pessoaControl.excluir(pessoa.id)}" style="margin-left: 10px;" value="Excluir"/> -->
+				</p:column>
+			</p:dataTable>
+		</div>
 
 		<p:dialog header="Pessoa" widgetVar="formulario" minHeight="40"
-			showEffect="fade" closeOnEscape="true" >
-			<p:panelGrid id="modeloDiag" columns="6">
-				<h:outputText value="Nome:" />
-				<p:inputText value="#{pessoaControl.pessoa.nome}" />
-				<h:outputText value="CPF:" />
-				<p:inputText value="#{pessoaControl.pessoa.cpf}" />
-				<h:outputText value="Endereço:" />
-				<p:inputText value="#{pessoaControl.pessoa.endereco}" />
-				<h:outputText value="Bairro:" />
-				<p:inputText value="#{pessoaControl.pessoa.bairro}" />
-				<h:outputText value="CEP:" />
-				<p:inputText value="#{pessoaControl.pessoa.cep}" />
-				<h:outputText value="Telefone:" />
-				<p:inputText value="#{pessoaControl.pessoa.telefone}" />
-				<p:selectBooleanCheckbox value="pessoa.Funcionario"
-					itemLabel="Funcionario" autoWidth="false" />
-				<p:selectBooleanCheckbox value="pessoa.whatsapp"
-					itemLabel="Whatsapp" />
+			showEffect="fade" closeOnEscape="true">
+			<div style="margin-bottom: 20px">
+				<p:panelGrid id="modeloDiag" columns="6">
+					<h:outputText value="Nome:" />
+					<p:inputText value="#{pessoaControl.pessoa.nome}" />
+					<h:outputText value="CPF:" />
+					<p:inputText value="#{pessoaControl.pessoa.cpf}" />
+					<h:outputText value="Endereço:" />
+					<p:inputText value="#{pessoaControl.pessoa.endereco}" />
+					<h:outputText value="Bairro:" />
+					<p:inputText value="#{pessoaControl.pessoa.bairro}" />
+					<h:outputText value="CEP:" />
+					<p:inputText value="#{pessoaControl.pessoa.cep}" />
+					<h:outputText value="Telefone:" />
+					<p:inputText value="#{pessoaControl.pessoa.telefone}" />
+					<p:selectBooleanCheckbox value="pessoa.Funcionario"
+						itemLabel="Funcionario" autoWidth="false" />
+					<p:selectBooleanCheckbox value="pessoa.whatsapp"
+						itemLabel="Whatsapp" />
 
-			</p:panelGrid>
+				</p:panelGrid>
+			</div>
 
 			<p:commandButton value="Salvar" action="#{modeloControl.salvar}"
 				onclick="PF('formulario').close()" />

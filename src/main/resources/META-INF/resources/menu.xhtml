@@ -3,27 +3,26 @@
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-	<p:menubar>
-		<p:submenu label="Home" icon="pi pi-fw pi-home" outcome="home"  >
-		<p:menuitem value="Home" icon="pi pi-fw pi-pencil" outcome="modelo" />
-		</p:submenu>
-	</p:menubar>
-	<p:menubar >
-		<p:submenu label="Cadastro" icon="pi pi-fw pi-file" >
-			<p:menuitem value="Modelo" icon="pi pi-fw pi-pencil" outcome="modelo" />
-		</p:submenu>
+	
+	
+	<p:menubar  style="margin-bottom: 20px">
+		<p:menuitem value="Menu" id = "logo" icon="pi pi-fw pi-home" outcome="home">
+		</p:menuitem>
+		
 		<p:submenu label="Ordem de Serviço" icon="pi pi-fw pi-file">
 			<p:menuitem value="Nova" icon="pi pi-fw pi-home"
 				outcome="ordem_servico" />
-			<p:menuitem value="Listar" icon="pi pi-fw pi-pencil"
-				outcome="ordem_servico_lista" />
-		</p:submenu>
-		<p:submenu label="Pessoa" icon="pi pi-fw pi-file">
-			<p:menuitem value="Nova" icon="pi pi-fw pi-home"
-				outcome="ordem_servico" />
+				
 			<p:menuitem value="Listar" icon="pi pi-fw pi-pencil"
 				outcome="ordem_servico_lista" />
 		</p:submenu>
 
+			<p:menuitem value="Cadastrar Pessoa" icon="pi pi-fw pi-user"
+				outcome="cadastroPessoa" />
+
+			<p:menuitem value="Cadastrar Veículo" icon="pi pi-fw pi-car"
+				outcome="cadastroVeiculo" />
+
 	</p:menubar>
+
 </ui:composition>
