@@ -84,8 +84,8 @@
 				<p:outputLabel value="Veiculo" for="veiculo"></p:outputLabel>
 				<p:autoComplete id="veiculo"
 					value="#{ordemDeServicoControl.ordemDeServico.veiculo}"
-					completeMethod="#{pessoaControl.completeCliente}" var="veiculo"
-					itemValue="#{veiculo}" itemLabel="#{veiculo.nome}"
+					completeMethod="#{veiculoControl.completeVeiculo}" var="veiculo"
+					itemValue="#{veiculo}" itemLabel="#{veiculo.placa}"
 					style="width: 100%" forceSelection="true" scrollHeight="250"
 					requiredMessage="O Funcionario deve ser informado"
 					converter="converter"></p:autoComplete>
