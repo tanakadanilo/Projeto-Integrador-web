@@ -1,6 +1,5 @@
 package com.example.oficinaco.jpa;
 
-import java.beans.Statement;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -9,12 +8,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.example.oficinaco.jpa.dao.MunicipioDao;
 import com.example.oficinaco.jpa.entidade.EnumUf;
 import com.example.oficinaco.jpa.entidade.Municipio;
-import com.example.oficinaco.jpa.jsf.MunicipioControl;
 
 public class PreencheBancoMunicipios {
 

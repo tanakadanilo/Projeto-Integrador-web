@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.example.oficinaco.jpa.dao.OrdemDeServicoDao;
-import com.example.oficinaco.jpa.dao.PessoaDao;
 import com.example.oficinaco.jpa.dao.PessoaDaoImpl;
 import com.example.oficinaco.jpa.dao.ServicoDao;
 import com.example.oficinaco.jpa.dao.VeiculoDao;
@@ -28,9 +27,6 @@ public class OrdemServicoControl {
 	private Integer pessoaId;
 	private Integer servicoId;
 	private Integer funcionarioId;
-
-	@Autowired
-	private PessoaDao pessoaDao;
 
 	@Autowired
 	private PessoaDaoImpl pessoaDaoImpl;

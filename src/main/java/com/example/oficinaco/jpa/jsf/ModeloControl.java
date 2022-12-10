@@ -15,29 +15,29 @@ import com.example.oficinaco.jpa.entidade.Modelo;
 @Component
 @SessionScoped
 public class ModeloControl {
-	
+
 	@Autowired
 	private ModeloDao modeloDao;
-	
+
 	private Modelo modelo = new Modelo();
-	
+
 	private List<Modelo> modelos = new ArrayList<>();
-	
+
 	@PostConstruct
 	public void init() {
 		listar();
 	}
-	
+
 	public void salvar() {
 		modeloDao.save(modelo);
 		modelo = new Modelo();
 		listar();
 	}
-	
+
 	public void listar() {
 		modelos = modeloDao.findAll();
 	}
-	
+
 	public void excluir(Integer id) {
 		modeloDao.deleteById(id);
 		listar();
@@ -59,19 +59,7 @@ public class ModeloControl {
 		this.modelos = modelos;
 	}
 
-	
+	public List<Modelo> completeModelo(String nome) {
+		return modeloDao.completeModelo(nome);
+	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

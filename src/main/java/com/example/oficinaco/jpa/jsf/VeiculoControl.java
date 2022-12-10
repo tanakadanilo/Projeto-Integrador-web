@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.example.oficinaco.jpa.dao.VeiculoDao;
+import com.example.oficinaco.jpa.entidade.Modelo;
 import com.example.oficinaco.jpa.entidade.Veiculo;
 
 @Component
