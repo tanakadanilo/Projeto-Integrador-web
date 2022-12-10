@@ -13,9 +13,9 @@ public class Produto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	private String nome;
-	
+
 	private BigDecimal precoVenda;
 
 	public Integer getId() {
@@ -41,7 +41,10 @@ public class Produto {
 	public void setPrecoVenda(BigDecimal precoVenda) {
 		this.precoVenda = precoVenda;
 	}
-	
-	
-	
+
+	@Override
+	public String toString() {
+		return String.format("%s - %s", nome, precoVenda);
+	}
+
 }
