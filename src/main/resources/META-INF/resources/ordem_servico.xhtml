@@ -13,8 +13,8 @@
 
 		<ui:include src="menu.xhtml" />
 
-		<p:commandButton value="Nova Ordem de Serviço" type="button" icon="pi pi-external-link"
-			onclick="PF('formulario').show()" />
+		<p:commandButton value="Nova Ordem de Serviço" type="button"
+			icon="pi pi-external-link" onclick="PF('formulario').show()" />
 
 		<p:dataTable id="lista" var="os"
 			value="#{ordemServicoControl.ordensDeServicos}" allowUnsorting="true"
@@ -46,6 +46,16 @@
 			<p:column sortBy="#{os.dataInicioServico}"
 				headerText="Data de início do serviço">
 				<h:outputText value="#{os.dataInicioServico}" />
+			</p:column>
+			<p:column headerText="">
+				<p:commandButton icon="pi pi-pencil" update="form:modeloDiag"
+					action="#{ordemDeServicoControl.setOrdemDeServico(os)}"
+					onclick="PF('formulario').show()" value="Editar" />
+			</p:column>
+			<p:column>
+				<p:commandButton icon="pi pi-trash" update="form:lista"
+					action="#{ordemDeServicoControl.excluir(os.id)}"
+					style="margin-left: 10px;" value="Excluir" />
 			</p:column>
 		</p:dataTable>
 
