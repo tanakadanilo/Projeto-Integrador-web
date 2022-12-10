@@ -64,9 +64,17 @@ public class PessoaControl {
 	public void setPessoas(List<Pessoa> Pessoas) {
 		this.Pessoas = Pessoas;
 	}
-	
-	public List<Pessoa> completeCliente(String nome){
-		return PessoaDao.completeCliente(nome);
+
+	public List<Pessoa> completePessoa(String nome) {
+		return PessoaDao.completePessoa("%" + nome + "%");
+	}
+
+	public List<Pessoa> completeCliente(String nome) {
+		return PessoaDao.completeCliente("%" + nome + "%");
+	}
+
+	public List<Pessoa> completeFuncionario(String nome) {
+		return PessoaDao.completeFuncionario("%" + nome + "%");
 	}
 
 }

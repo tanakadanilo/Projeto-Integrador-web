@@ -15,10 +15,10 @@ public interface PessoaDao extends JpaRepository<Pessoa, Integer> {
 	@Query(nativeQuery = true, value = "select * from pessoa p where lower(p.nome) like lower(:nome)")
 	List<Pessoa> completePessoa(@Param("nome") String nome);
 
-	@Query(nativeQuery = true, value = "select * from pessoa p where p.funcionario and lower(p.nome) like lower(:nome)")
+	@Query(nativeQuery = true, value = "select * from pessoa p where  lower(p.nome) like lower(:nome) and p.funcionario")
 	List<Pessoa> completeFuncionario(@Param("nome") String nome);
 
-	@Query(nativeQuery = true, value = "select * from pessoa p where not(p.funcionario) and lower(p.nome) like lower(:nome)")
+	@Query(nativeQuery = true, value = "select * from pessoa p where lower(p.nome) like lower(:nome) and not(p.funcionario) ")
 	List<Pessoa> completeCliente(@Param("nome") String nome);
 
 }

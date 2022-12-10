@@ -46,8 +46,15 @@
 				<p:selectBooleanCheckbox value="pessoa.whatsapp" itemLabel="Basic" />
 
 				<p:column headerText="">
-					<!-- 				<p:commandButton icon="pi pi-pencil" update="form:pessoaDiag" action="#{pessoaControl.setpessoa(pessoa)}" onclick="PF('formulario').show()" value="Editar"/> -->
-					<!-- 				<p:commandButton icon="pi pi-trash" update="form:lista" action="#{pessoaControl.excluir(pessoa.id)}" style="margin-left: 10px;" value="Excluir"/> -->
+					<p:commandButton icon="pi pi-pencil" update="form:pessoaDiag"
+						action="#{pessoaControl.setPessoa(pessoa)}"
+						onclick="PF('formulario').show()" value="Editar" />
+				</p:column>
+
+				<p:column headerText="">
+					<p:commandButton icon="pi pi-trash" update="form:lista"
+						action="#{pessoaControl.excluir(pessoa.id)}"
+						style="margin-left: 10px;" value="Excluir" />
 				</p:column>
 			</p:dataTable>
 		</div>
@@ -55,7 +62,7 @@
 		<p:dialog header="Pessoa" widgetVar="formulario" minHeight="40"
 			showEffect="fade" closeOnEscape="true">
 			<div style="margin-bottom: 20px">
-				<p:panelGrid id="modeloDiag" columns="6">
+				<p:panelGrid id="pessoaDiag" columns="6">
 					<h:outputText value="Nome:" />
 					<p:inputText value="#{pessoaControl.pessoa.nome}" />
 					<h:outputText value="CPF:" />
@@ -76,7 +83,7 @@
 				</p:panelGrid>
 			</div>
 
-			<p:commandButton value="Salvar" action="#{modeloControl.salvar}"
+			<p:commandButton value="Salvar" action="#{pessoaControl.salvar}"
 				onclick="PF('formulario').close()" />
 
 		</p:dialog>

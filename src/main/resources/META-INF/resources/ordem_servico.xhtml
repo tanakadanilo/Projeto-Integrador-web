@@ -66,16 +66,16 @@
 				<p:outputLabel value="Cliente" for="cliente"></p:outputLabel>
 				<p:autoComplete id="cliente"
 					value="#{ordemDeServicoControl.ordemDeServico.cliente}"
-					completeMethod="#{pessoaControl.completeCliente}" var="cliente"
+					completeMethod="#{pessoaControl.completePessoa}" var="cliente"
 					itemValue="#{cliente}" itemLabel="#{cliente.nome}"
 					style="width: 100%" forceSelection="true" scrollHeight="250"
-					requiredMessage="O Cliente deve ser informado"
+					
 					converter="converter"></p:autoComplete>
 
 				<p:outputLabel value="Funcionario" for="funcionario"></p:outputLabel>
 				<p:autoComplete id="funcionario"
 					value="#{ordemDeServicoControl.ordemDeServico.funcionario}"
-					completeMethod="#{pessoaControl.completeCliente}" var="funcionario"
+					completeMethod="#{pessoaControl.completeFuncionario}" var="funcionario"
 					itemValue="#{funcionario}" itemLabel="#{funcionario.nome}"
 					style="width: 100%" forceSelection="true" scrollHeight="250"
 					requiredMessage="O Funcionario deve ser informado"
