@@ -75,9 +75,10 @@
 					<p:inputText value="#{pessoaControl.pessoa.cep}" />
 					<h:outputText value="Telefone:" />
 					<p:inputText value="#{pessoaControl.pessoa.telefone}" />
-					<p:selectBooleanCheckbox value="pessoa.Funcionario"
+					<p:selectBooleanCheckbox
+						value="#{pessoaControl.pessoa.funcionario}"
 						itemLabel="Funcionario" autoWidth="false" />
-					<p:selectBooleanCheckbox value="pessoa.whatsapp"
+					<p:selectBooleanCheckbox value="#{pessoaControl.pessoa.whatsapp}"
 						itemLabel="Whatsapp" />
 
 				</p:panelGrid>
