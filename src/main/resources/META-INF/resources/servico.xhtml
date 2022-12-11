@@ -6,14 +6,14 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 
 <h:head>
-	<title>Servico</title>
+	<title>Serviços</title>
 </h:head>
 <h:body>
 	<h:form id="form">
 
 		<ui:include src="menu.xhtml" />
 
-		<p:commandButton value="Novo Serviço" type="button" icon="pi pi-external-link"
+		<p:commandButton style="margin-bottom: 20px" value="Novo Serviço" type="button" icon="pi pi-external-link"
 			onclick="PF('formulario').show()" />
 
 		<p:dataTable id="lista" var="servico"
@@ -30,14 +30,24 @@
 			<p:column sortBy="#{servico.preco}" headerText="Preço">
 				<h:outputText value="#{servico.preco}" />
 			</p:column>
+			<p:column headerText="">
+				<p:commandButton icon="pi pi-pencil" update="form:abacate"
+					action="#{servicoControl.setServico(servico)}"
+					onclick="PF('formulario').show()" value="Editar" />
+			</p:column>
+			<p:column>
+				<p:commandButton icon="pi pi-trash" update="form:lista"
+					action="#{servicoControl.excluirServico(servico.id)}"
+					style="margin-left: 10px;" value="Excluir" />
+			</p:column>
 		</p:dataTable>
 
 		<p:dialog header="Serviço" widgetVar="formulario"
 			minHeight="40" showEffect="fade" closeOnEscape="true" width="1080">
-			<p:panelGrid columns="4" layout="grid">
+			<p:panelGrid id = "abacate" columns="8" layout="grid">
 
 				<p:outputLabel value="Nome:" for="nome"></p:outputLabel>
-				<p:inputText id="nome" value="#{servicoControl.servico.nome}"></p:inputText>
+				<p:inputText style="margin-right:120px" id="nome" value="#{servicoControl.servico.nome}"></p:inputText>
 
 				<p:outputLabel for="preco" value="Preço" />
 				<p:inputNumber id="preco" value="#{servicoControl.servico.preco}"

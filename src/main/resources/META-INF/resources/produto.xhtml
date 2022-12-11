@@ -6,14 +6,14 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 
 <h:head>
-	<title>Produto</title>
+	<title>Produtos</title>
 </h:head>
 <h:body>
 	<h:form id="form">
 
 		<ui:include src="menu.xhtml" />
 
-		<p:commandButton value="Novo Produto" type="button"
+		<p:commandButton style="margin-bottom: 20px" value="Novo Produto" type="button"
 			icon="pi pi-external-link" onclick="PF('formulario').show()" />
 
 		<p:dataTable id="lista" var="produto"
@@ -42,21 +42,21 @@
 			</p:column>
 		</p:dataTable>
 
-		<p:dialog header="Serviço" widgetVar="formulario" minHeight="40"
+		<p:dialog header="Produto" widgetVar="formulario" minHeight="40"
 			showEffect="fade" closeOnEscape="true" width="1080">
 			<p:panelGrid id="modeloDiag" columns="6">
 
 				<p:outputLabel value="Nome:" for="nome"></p:outputLabel>
-				<p:inputText id="nome" value="#{produtoControl.produto.nome}"></p:inputText>
+				<p:inputText id="nome" required="true" value="#{produtoControl.produto.nome}"></p:inputText>
 
 				<p:outputLabel for="preco" value="Preço" />
-				<p:inputNumber id="preco"
+				<p:inputNumber id="preco" required="true"
 					value="#{produtoControl.produto.precoVenda}" symbol="R$ "
 					symbolPosition="p" decimalSeparator="," thousandSeparator="." />
 			</p:panelGrid>
 
 
-			<p:commandButton value="Salvar" action="#{produtoControl.salvar}"
+			<p:commandButton style="margin-top: 20px" value="Salvar" action="#{produtoControl.salvar}"
 				onclick="PF('formulario').close()" />
 		</p:dialog>
 	</h:form>
