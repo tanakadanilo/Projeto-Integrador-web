@@ -68,7 +68,7 @@
 					<p:autoComplete id="modelo"
 						value="#{veiculoControl.veiculo.modelo}"
 						completeMethod="#{modeloControl.completeModelo}" var="modelo"
-						itemValue="#{modelo.nome}" itemLabel="#{modelo.nome}"
+						itemValue="#{modelo}" itemLabel="#{modelo.nome}"
 						style="width: 100%" forceSelection="true" scrollHeight="250"
 						requiredMessage="O modelo do veículo deve ser informado"
 						converter="converter"></p:autoComplete>
@@ -86,7 +86,7 @@
 				</p:panelGrid>
 			</div>
 
-			<p:commandButton value="Salvar" action="#{modeloControl.salvar}"
+			<p:commandButton value="Salvar" action="#{veiculoControl.salvar}"
 				onclick="PF('formulario').close()" />
 
 		</p:dialog>

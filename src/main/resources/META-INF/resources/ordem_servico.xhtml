@@ -17,8 +17,8 @@
 			icon="pi pi-external-link" onclick="PF('formulario').show()" />
 
 		<p:dataTable id="lista" var="os"
-			value="#{ordemServicoControl.ordensDeServicos}" allowUnsorting="true"
-			sortMode="single">
+			value="#{ordemDeServicoControl.ordensDeServicos}"
+			allowUnsorting="true" sortMode="single">
 			<p:column sortBy="#{os.id}" headerText="Id">
 				<h:outputText value="#{os.id}" />
 			</p:column>
@@ -31,13 +31,23 @@
 			<p:column sortBy="#{os.veiculo.placa}" headerText="Veiculo">
 				<h:outputText value="#{os.veiculo.placa}" />
 			</p:column>
-			<p:column sortBy="#{os.servicos.size}"
+			<p:column 
 				headerText="Quantidade de serviços executados">
-				<h:outputText value="#{os.servicos.size}" />
+				<p:selectCheckboxMenu id="listaServicos" value="#{os.servicos}"
+					label="Cities" style="width: 15rem" filter="true"
+					filterMatchMode="startsWith" panelStyle="width: 15rem"
+					scrollHeight="250" dynamic="true">
+					<f:selectItems value="#{os.servicos}" />
+				</p:selectCheckboxMenu>
 			</p:column>
-			<p:column sortBy="#{os.produtos.size}"
+			<p:column 
 				headerText="Quantidade de produtos usados">
-				<h:outputText value="#{os.produtos.size}" />
+				<p:selectCheckboxMenu id="listaProdutos" value="#{os.produtos}"
+					label="Cities" style="width: 15rem" filter="true"
+					filterMatchMode="startsWith" panelStyle="width: 15rem"
+					scrollHeight="250" dynamic="true">
+					<f:selectItems value="#{os.produtos}" />
+				</p:selectCheckboxMenu>
 			</p:column>
 			<p:column sortBy="#{os.dataEntrada}"
 				headerText="Data de entrada do veículo">
@@ -48,7 +58,8 @@
 				<h:outputText value="#{os.dataInicioServico}" />
 			</p:column>
 			<p:column headerText="">
-				<p:commandButton icon="pi pi-pencil" update="form:modeloDiag"
+				<p:commandButton icon="pi pi-pencil"
+					update="form:ordemDeServicoDiag"
 					action="#{ordemDeServicoControl.setOrdemDeServico(os)}"
 					onclick="PF('formulario').show()" value="Editar" />
 			</p:column>
@@ -61,7 +72,7 @@
 
 		<p:dialog header="Ordem de Serviço" widgetVar="formulario"
 			minHeight="40" showEffect="fade" closeOnEscape="true" width="1080">
-			<p:panelGrid columns="4" layout="grid">
+			<p:panelGrid columns="4" layout="grid" id="ordemDeServicoDiag">
 
 				<p:outputLabel value="Cliente" for="cliente"></p:outputLabel>
 				<p:autoComplete id="cliente"
@@ -91,16 +102,18 @@
 					converter="converter"></p:autoComplete>
 
 				<p:selectCheckboxMenu id="servicos"
-					value="#{servicoControl.servicos}" label="Serviços"
-					style="width: 15rem" filter="true" filterMatchMode="startsWith"
-					panelStyle="width: 15rem" scrollHeight="250" dynamic="true">
+					value="#{ordemDeServicoControl.ordemDeServico.servicos}"
+					label="Serviços" style="width: 15rem" filter="true"
+					filterMatchMode="startsWith" panelStyle="width: 15rem"
+					scrollHeight="250" dynamic="true">
 					<f:selectItems value="#{servicoControl.servicos}" />
 				</p:selectCheckboxMenu>
 
 				<p:selectCheckboxMenu id="produtos"
-					value="#{produtoControl.produtos}" label="Produtos"
-					style="width: 15rem" filter="true" filterMatchMode="startsWith"
-					panelStyle="width: 15rem" scrollHeight="250" dynamic="true">
+					value="#{ordemDeServicoControl.ordemDeServico.produtos}"
+					label="Produtos" style="width: 15rem" filter="true"
+					filterMatchMode="startsWith" panelStyle="width: 15rem"
+					scrollHeight="250" dynamic="true">
 					<f:selectItems value="#{produtoControl.produtos}" />
 				</p:selectCheckboxMenu>
 
