@@ -65,7 +65,7 @@ public class OrdemDeServico {
 			vlr = vlr.add(oss.getTotal());
 		}
 		for (OrdemDeServicoProduto oss : produtos) {
-			vlr = vlr.add(oss.getPrecoTotal());
+			vlr = vlr.add(oss.getPreco());
 		}
 		vlr = vlr.subtract(desconto);
 		return vlr;
