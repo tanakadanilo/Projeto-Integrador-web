@@ -67,8 +67,11 @@ public class OrdemDeServico {
 		for (OrdemDeServicoProduto oss : produtos) {
 			vlr = vlr.add(oss.getPreco());
 		}
-		vlr = vlr.subtract(desconto);
 		return vlr;
+	}
+
+	public BigDecimal getValorFinal() {
+		return getTotalServicos().subtract(desconto);
 	}
 
 	public Integer getId() {
