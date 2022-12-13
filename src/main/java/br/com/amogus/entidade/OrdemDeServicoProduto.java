@@ -8,7 +8,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import org.springframework.transaction.annotation.Transactional;
+
 @Entity
+@Transactional
 public class OrdemDeServicoProduto {
 
 	@Id
@@ -39,11 +42,12 @@ public class OrdemDeServicoProduto {
 	}
 
 	public BigDecimal getPreco() {
+		setPreco(null);
 		return preco;
 	}
 
 	public void setPreco(BigDecimal preco) {
-		this.preco = preco;
+		this.preco = this.produto.getPrecoVenda().multiply(BigDecimal.valueOf(quantidade));
 	}
 
 	public Produto getProduto() {

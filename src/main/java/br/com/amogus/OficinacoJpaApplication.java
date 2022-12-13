@@ -21,7 +21,7 @@ import com.sun.faces.config.ConfigureListener;
 import com.sun.faces.config.FacesInitializer;
 
 @SpringBootApplication
-public class OficinacoJpaApplication implements ServletContextInitializer{
+public class OficinacoJpaApplication implements ServletContextInitializer {
 
 	public static void main(String[] args) {
 		SpringApplication.run(OficinacoJpaApplication.class, args);
@@ -38,7 +38,7 @@ public class OficinacoJpaApplication implements ServletContextInitializer{
 
 		Set<Class<?>> clazz = new HashSet<Class<?>>();
 
-		clazz.add(OficinacoJpaApplication.class); 
+		clazz.add(OficinacoJpaApplication.class);
 
 		FacesInitializer facesInitializer = new FacesInitializer();
 		facesInitializer.onStartup(clazz, servletContext);
@@ -50,19 +50,19 @@ public class OficinacoJpaApplication implements ServletContextInitializer{
 				new JsfApplicationObjectConfigureListener());
 	}
 
-
 	static class JsfApplicationObjectConfigureListener extends ConfigureListener {
 
 		@Override
 		public void contextInitialized(ServletContextEvent sce) {
 			super.contextInitialized(sce);
 
-			ApplicationFactory factory = (ApplicationFactory) FactoryFinder.getFactory(FactoryFinder.APPLICATION_FACTORY);
+			ApplicationFactory factory = (ApplicationFactory) FactoryFinder
+					.getFactory(FactoryFinder.APPLICATION_FACTORY);
 			Application app = factory.getApplication();
 
 			app.addELResolver(new SpringBeanFacesELResolver());
 			app.addConverter("converter", "br.com.amogus.conversores.GenericConverter");
 		}
-	}	
+	}
 
 }

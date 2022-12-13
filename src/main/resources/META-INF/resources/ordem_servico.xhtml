@@ -10,11 +10,12 @@
 </h:head>
 <h:body>
 	<h:form id="form">
-
+		<p:messages />
 		<ui:include src="menu.xhtml" />
 
-		<p:commandButton style = "margin-bottom:20px" value="Nova Ordem de Serviço" type="button"
-			icon="pi pi-plus-circle" onclick="PF('formulario').show()" />
+		<p:commandButton style="margin-bottom:20px"
+			value="Nova Ordem de Serviço" type="button" icon="pi pi-plus-circle"
+			onclick="PF('formulario').show()" />
 
 		<p:dataTable id="lista" var="os"
 			value="#{ordemDeServicoControl.ordensDeServicos}"
@@ -31,24 +32,7 @@
 			<p:column sortBy="#{os.veiculo.placa}" headerText="Veiculo">
 				<h:outputText value="#{os.veiculo.placa}" />
 			</p:column>
-			<p:column 
-				headerText="Quantidade de serviços executados">
-				<p:selectCheckboxMenu id="listaServicos" value="#{os.servicos}"
-					label="Cities" style="width: 15rem" filter="true"
-					filterMatchMode="startsWith" panelStyle="width: 15rem"
-					scrollHeight="250" dynamic="true">
-					<f:selectItems value="#{os.servicos}" />
-				</p:selectCheckboxMenu>
-			</p:column>
-			<p:column 
-				headerText="Quantidade de produtos usados">
-				<p:selectCheckboxMenu id="listaProdutos" value="#{os.produtos}"
-					label="Cities" style="width: 15rem" filter="true"
-					filterMatchMode="startsWith" panelStyle="width: 15rem"
-					scrollHeight="250" dynamic="true">
-					<f:selectItems value="#{os.produtos}" />
-				</p:selectCheckboxMenu>
-			</p:column>
+
 			<p:column sortBy="#{os.dataEntrada}"
 				headerText="Data de entrada do veículo">
 				<h:outputText value="#{os.dataEntrada}" />
@@ -57,6 +41,20 @@
 				headerText="Data de início do serviço">
 				<h:outputText value="#{os.dataInicioServico}" />
 			</p:column>
+			<p:column sortBy="#{os.dataFimServico}"
+				headerText="Data de fim do serviço">
+				<h:outputText value="#{os.dataFimServico}" />
+			</p:column>
+			<p:column sortBy="#{os.dataEntrega}"
+				headerText="Data de entrega do veiculo">
+				<h:outputText value="#{os.dataEntrega}" />
+			</p:column>
+			<p:column sortBy="#{os.desconto}" headerText="Desconto">
+				<h:outputText value="#{os.desconto}" />
+			</p:column>
+<!-- 			<p:column sortBy="#{os.valorFinal}" headerText="Valor final"> -->
+<!-- 				<h:outputText value="#{os.valorFinal}" /> -->
+<!-- 			</p:column> -->
 			<p:column headerText="">
 				<p:commandButton icon="pi pi-pencil"
 					update="form:ordemDeServicoDiag"
@@ -70,7 +68,7 @@
 			</p:column>
 		</p:dataTable>
 
-		<p:dialog header="Ordem de Serviço" widgetVar="formulario"
+		<p:dialog header="Ordem de Serviço" widgetVar="formulario" id="formOS"
 			minHeight="40" showEffect="fade" closeOnEscape="true" width="1080">
 			<p:panelGrid columns="4" layout="grid" id="ordemDeServicoDiag">
 
@@ -101,22 +99,63 @@
 					requiredMessage="O Funcionario deve ser informado"
 					converter="converter"></p:autoComplete>
 
-				<p:selectCheckboxMenu id="servicos"
-					value="#{ordemDeServicoControl.ordemDeServico.servicos}"
-					label="Serviços" style="width: 15rem" filter="true"
-					filterMatchMode="startsWith" panelStyle="width: 15rem"
-					scrollHeight="250" dynamic="true">
-					<f:selectItems value="#{servicoControl.servicos}" />
-				</p:selectCheckboxMenu>
+				<p:outputLabel value="Servico" for="servico"></p:outputLabel>
+				<p:autoComplete id="servico"
+					value="#{ordemDeServicoControl.ordemDeServicoServico.servico}"
+					completeMethod="#{servicoControl.completeServico}" var="servico"
+					itemValue="#{servico}" itemLabel="#{servico.nome}"
+					style="width: 100%" forceSelection="true" scrollHeight="250"
+					requiredMessage="O Funcionario deve ser informado"
+					converter="converter"></p:autoComplete>
+				<p:outputLabel value="Quantidade: "></p:outputLabel>
+				<p:inputText disabled="false"
+					value="#{ordemDeServicoControl.ordemDeServicoServico.quantidade}"></p:inputText>
 
-				<p:selectCheckboxMenu id="produtos"
-					value="#{ordemDeServicoControl.ordemDeServico.produtos}"
-					label="Produtos" style="width: 15rem" filter="true"
-					filterMatchMode="startsWith" panelStyle="width: 15rem"
-					scrollHeight="250" dynamic="true">
-					<f:selectItems value="#{produtoControl.produtos}" />
-				</p:selectCheckboxMenu>
+				<p:commandButton value="Adicionar Servico"
+					action="#{ordemDeServicoControl.adicionarOrdemDeServicoServico}"
+					update="formOS"></p:commandButton>
 
+				<p:dataTable var="servico"
+					value="#{ordemDeServicoControl.ordemDeServico.servicos}">
+					<p:column headerText="Nome" sortBy="#{servico.servico.nome}">
+						<h:outputText value="#{servico.servico.nome}"></h:outputText>
+					</p:column>
+					<p:column headerText="Quantidade" sortBy="servico.quantidade">
+						<h:outputText value="#{servico.quantidade}"></h:outputText>
+					</p:column>
+					<p:column headerText="Valor" sortBy="#{servico.total}">
+						<h:outputText value="#{servico.total}"></h:outputText>
+					</p:column>
+				</p:dataTable>
+
+				<p:outputLabel value="Produto" for="produto"></p:outputLabel>
+				<p:autoComplete id="produto"
+					value="#{ordemDeServicoControl.ordemDeServicoProduto.produto}"
+					completeMethod="#{ordemDeServicoControl.completeProduto}"
+					var="produto" itemValue="#{produto}" itemLabel="#{produto.nome}"
+					style="width: 100%" forceSelection="true" scrollHeight="250"
+					requiredMessage="O Produto deve ser informado"
+					converter="converter"></p:autoComplete>
+				<p:outputLabel value="Quantidade: "></p:outputLabel>
+				<p:inputText disabled="false"
+					value="#{ordemDeServicoControl.ordemDeServicoProduto.quantidade}"></p:inputText>
+
+				<p:commandButton value="Adicionar Produto"
+					action="#{ordemDeServicoControl.adicionarOrdemDeServicoProduto}"
+					update="formOS"></p:commandButton>
+
+				<p:dataTable var="produto"
+					value="#{ordemDeServicoControl.ordemDeServico.produtos}">
+					<p:column headerText="Nome" sortBy="#{produto.produto.nome}">
+						<h:outputText value="#{produto.produto.nome}"></h:outputText>
+					</p:column>
+					<p:column headerText="Quantidade" sortBy="produto.quantidade">
+						<h:outputText value="#{produto.quantidade}"></h:outputText>
+					</p:column>
+					<p:column headerText="Valor" sortBy="#{produto.total}">
+						<h:outputText value="#{produto.preco}"></h:outputText>
+					</p:column>
+				</p:dataTable>
 				<p:outputLabel for="dataEntrada" value="data Entrada" />
 				<p:datePicker id="dataEntrada"
 					value="#{ordemDeServicoControl.ordemDeServico.dataEntrada}" />
@@ -148,7 +187,10 @@
 			<p:commandButton value="Salvar"
 				action="#{ordemDeServicoControl.salvar}"
 				onclick="PF('formulario').close()" />
+
+			<p:dataTable value="#{ordemDeServicoControl.ordemDeServico.servicos}"></p:dataTable>
 		</p:dialog>
+
 
 		<!--  A partir daqui, código do cesel, manter até decidir qual manter -->
 		<!-- 		<p:dialog header="Ordem de Servico" widgetVar="formulario" minHeight="40" -->

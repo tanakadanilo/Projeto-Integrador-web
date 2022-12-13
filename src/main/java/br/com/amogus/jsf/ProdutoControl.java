@@ -68,4 +68,8 @@ public class ProdutoControl {
 		this.produtos = produtos;
 	}
 
+	public List<Produto> completeProduto(String nome) {
+		return produtoDao.completeProduto("%" + nome + "%");
+	}
+
 }

@@ -11,14 +11,17 @@ import org.springframework.stereotype.Component;
 
 import br.com.amogus.dao.OrdemDeServicoDao;
 import br.com.amogus.dao.PessoaDaoImpl;
+import br.com.amogus.dao.ProdutoDao;
 import br.com.amogus.dao.ServicoDao;
 import br.com.amogus.dao.VeiculoDao;
 import br.com.amogus.entidade.OrdemDeServico;
 import br.com.amogus.entidade.OrdemDeServicoProduto;
 import br.com.amogus.entidade.OrdemDeServicoServico;
 import br.com.amogus.entidade.Pessoa;
+import br.com.amogus.entidade.Produto;
 import br.com.amogus.entidade.Servico;
 import br.com.amogus.entidade.Veiculo;
+import br.com.amogus.validation.ValidaOrdemDeServico;
 
 @Component
 @SessionScoped
@@ -39,6 +42,10 @@ public class OrdemDeServicoControl {
 
 	@Autowired
 	private ServicoDao servicoDao;
+
+	@Autowired
+	private ProdutoDao produtoDao;
+
 	private String placa;
 	private OrdemDeServico ordemDeServico = new OrdemDeServico();
 	private OrdemDeServicoProduto ordemDeServicoProduto = new OrdemDeServicoProduto();
@@ -54,8 +61,19 @@ public class OrdemDeServicoControl {
 		ordensDeServicos = ordemDeServicoDao.findAll();
 	}
 
+	public void excluir(Integer id) {
+		ordemDeServicoDao.deleteById(id);
+		listar();
+	}
+
 	public void salvar() {
-		ordemDeServicoDao.save(ordemDeServico);
+		if (ValidaOrdemDeServico.validadeDatas(ordemDeServico.getDataEntrada(), ordemDeServico.getDataInicioServico(),
+				ordemDeServico.getDataEntrega(), ordemDeServico.getDataFimServico())
+				&& ValidaOrdemDeServico.validaDesconto(ordemDeServico.getDesconto(),
+						ordemDeServico.getTotalSemDesconto())) {
+			ordemDeServicoDao.save(ordemDeServico);
+
+		}
 		ordemDeServico = new OrdemDeServico();
 		listar();
 
@@ -90,6 +108,10 @@ public class OrdemDeServicoControl {
 
 	public List<Servico> completeServico(String query) {
 		return servicoDao.listarPorNome("%" + query + "%");
+	}
+
+	public List<Produto> completeProduto(String query) {
+		return produtoDao.completeProduto("%" + query + "%");
 	}
 
 	public List<Pessoa> completeFuncionario(String query) {
@@ -175,6 +197,13 @@ public class OrdemDeServicoControl {
 	public void setOrdensDeServicos(List<OrdemDeServico> ordensDeServicos) {
 		this.ordensDeServicos = ordensDeServicos;
 	}
-	
+
+	public void adicionarOrdemDeServicoServico() {
+		this.ordemDeServico.adicionarOrdemDeServicoServico(ordemDeServicoServico);
+	}
+
+	public void adicionarOrdemDeServicoProduto() {
+		this.ordemDeServico.adicionarOrdemDeServicoProduto(ordemDeServicoProduto);
+	}
 
 }

@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,6 +16,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import br.com.amogus.validation.ValidaOrdemDeServico;
 
 @Entity
 public class OrdemDeServico {
@@ -31,11 +35,13 @@ public class OrdemDeServico {
 	@ManyToOne(optional = false)
 	private Veiculo veiculo;
 
-	@OneToMany
+	private Double totalServicos;
+
+	@OneToMany(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "ordem_servico_id")
 	private List<OrdemDeServicoServico> servicos = new ArrayList<>();
 
-	@OneToMany
+	@OneToMany(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "ordem_servico_id")
 	private List<OrdemDeServicoProduto> produtos = new ArrayList<>();
 
@@ -59,19 +65,33 @@ public class OrdemDeServico {
 
 	private BigDecimal desconto = BigDecimal.ZERO;
 
-	public BigDecimal getTotalServicos() {
+	public void setTotalServicos(Double totalServicos) {
+		this.totalServicos = totalServicos;
+	}
+
+	public Double getTotalServicos() {
 		BigDecimal vlr = BigDecimal.ZERO;
 		for (OrdemDeServicoServico oss : servicos) {
 			vlr = vlr.add(oss.getTotal());
 		}
+		totalServicos = vlr.doubleValue();
+		return vlr.doubleValue();
+	}
+
+	public BigDecimal getTotalProdutos() {
+		BigDecimal vlr = BigDecimal.ZERO;
 		for (OrdemDeServicoProduto oss : produtos) {
 			vlr = vlr.add(oss.getPreco());
 		}
 		return vlr;
 	}
 
+	public BigDecimal getTotalSemDesconto() {
+		return getTotalProdutos().add(getTotalProdutos());
+	}
+
 	public BigDecimal getValorFinal() {
-		return getTotalServicos().subtract(desconto);
+		return getTotalSemDesconto().subtract(desconto);
 	}
 
 	public Integer getId() {
@@ -110,8 +130,9 @@ public class OrdemDeServico {
 		return data;
 	}
 
+	@PostConstruct
 	public void setData(Date data) {
-		this.data = data;
+		this.dataOs = new Date();
 	}
 
 	public Date getDataEntrada() {
@@ -135,6 +156,7 @@ public class OrdemDeServico {
 	}
 
 	public void setDataInicioServico(Date dataInicioServico) {
+		ValidaOrdemDeServico.validaDataInicioServico(dataInicioServico, dataEntrada);
 		this.dataInicioServico = dataInicioServico;
 	}
 
@@ -143,6 +165,7 @@ public class OrdemDeServico {
 	}
 
 	public void setDataFimServico(Date dataFimServico) {
+		ValidaOrdemDeServico.validaDataFimServico(dataFimServico, dataInicioServico);
 		this.dataFimServico = dataFimServico;
 	}
 
@@ -151,6 +174,7 @@ public class OrdemDeServico {
 	}
 
 	public void setDataEntrega(Date dataEntrega) {
+		ValidaOrdemDeServico.validaDataEntrega(dataEntrega, dataInicioServico);
 		this.dataEntrega = dataEntrega;
 	}
 
@@ -159,7 +183,16 @@ public class OrdemDeServico {
 	}
 
 	public void setDesconto(BigDecimal desconto) {
+		ValidaOrdemDeServico.validaDesconto(desconto, getTotalSemDesconto());
 		this.desconto = desconto;
+	}
+
+	public void setServicos(List<OrdemDeServicoServico> servicos) {
+		this.servicos = servicos;
+	}
+
+	public void setProdutos(List<OrdemDeServicoProduto> produtos) {
+		this.produtos = produtos;
 	}
 
 	public List<OrdemDeServicoServico> getServicos() {
@@ -168,6 +201,14 @@ public class OrdemDeServico {
 
 	public List<OrdemDeServicoProduto> getProdutos() {
 		return produtos;
+	}
+
+	public void adicionarOrdemDeServicoServico(OrdemDeServicoServico oss) {
+		this.servicos.add(oss);
+	}
+
+	public void adicionarOrdemDeServicoProduto(OrdemDeServicoProduto osp) {
+		this.produtos.add(osp);
 	}
 
 }
