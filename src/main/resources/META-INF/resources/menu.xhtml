@@ -7,29 +7,26 @@
 <h:outputStylesheet name="teste.css"></h:outputStylesheet>
 	<p:menubar style="margin-bottom: 20px">
 
-		<p:submenu label="Ordem de Serviço" icon="pi pi-fw pi-file">
-			<p:menuitem value="Nova" icon="pi pi-fw pi-home"
-				outcome="ordem_servico" />
-
-			<p:menuitem value="Listar" icon="pi pi-fw pi-pencil"
-				outcome="ordem_servico_lista" />
-		</p:submenu>
-
-		<p:menuitem value="Cadastrar Pessoa" icon="pi pi-fw pi-user"
+		<p:menuitem value="Cadastrar Pessoa" icon="pi pi-fw pi-user-plus"
 			outcome="cadastroPessoa" />
-
-		<p:submenu label="Cadastrar Veículo" icon="pi pi-fw pi-car">
-			<p:menuitem value="Cadastrar Veículo" icon="pi pi-fw pi-car"
-				outcome="cadastroVeiculo" />
-			<p:menuitem value="Cadastrar Modelo" icon="pi pi-fw pi-car"
-				outcome="modelo" />
-		</p:submenu>
 		
 		<p:menuitem value="Produtos" icon="pi pi-fw pi-shopping-cart"
 				outcome="produto" />
-				<p:menuitem value="Serviços" icon="pi pi-fw pi-car"
+		
+		<p:menuitem value="Serviços" icon="pi pi-fw pi-cog"
 				outcome="servico" />
+		
+		<p:menuitem value="Ordem de Serviço" icon="pi pi-fw pi-file"
+				outcome="ordem_servico" />
 
+		
+		<p:submenu label="Cadastrar Veículo" icon="pi pi-fw pi-car">
+			<p:menuitem value="Cadastrar Veículo" icon="pi pi-fw pi-minus"
+				outcome="cadastroVeiculo" />
+			<p:menuitem value="Cadastrar Modelo" icon="pi pi-fw pi-minus"
+				outcome="modelo" />
+		</p:submenu>
+		
 	</p:menubar>
 
 </ui:composition>

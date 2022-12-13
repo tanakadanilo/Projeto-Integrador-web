@@ -1,4 +1,4 @@
-package br.com.amogus.jpa;
+package br.com.amogus;
 
 import java.util.HashSet;
 import java.util.Set;

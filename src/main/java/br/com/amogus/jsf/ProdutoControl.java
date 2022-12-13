@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -27,9 +29,10 @@ public class ProdutoControl {
 	}
 
 	public void salvar() {
-		produtoDao.save(produto);
-		produto = new Produto();
-		listar();
+//		produtoDao.save(produto);
+//		produto = new Produto();
+//		listar();
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Autor não existente no banco de dados."));
 	}
 
 	public void listar() {

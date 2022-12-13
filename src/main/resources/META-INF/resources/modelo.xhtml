@@ -13,7 +13,7 @@
 	
         <ui:include src="menu.xhtml" />	
         
-        <p:commandButton style = "margin-bottom:20px" value="Novo" type="button" icon="pi pi-external-link" onclick="PF('formulario').show()"/>
+        <p:commandButton style = "margin-bottom:20px" value="Adicionar modelo" type="button" icon="pi pi-plus-circle" onclick="PF('formulario').show()"/>
 
 		<p:dataTable id="lista" var="modelo" value="#{modeloControl.modelos}" allowUnsorting="true" sortMode="single">
 			<p:column sortBy="#{modelo.id}" headerText="Id">
