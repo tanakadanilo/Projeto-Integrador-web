@@ -2,22 +2,30 @@ package br.com.amogus.validation;
 
 import java.util.InputMismatchException;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+
 public class ValidaPessoa {
 
-	public boolean validaTelefone(String telefoneParaValidar) {
+	public static boolean validaTelefone(String telefoneParaValidar) {
 		telefoneParaValidar = telefoneParaValidar.trim();
 		if (telefoneParaValidar.matches("^\\([1-9]{2}\\) 9[7-9]{1}[0-9]{3}\\-[0-9]{4}$")) {
 			return true;
 		} else {
 			telefoneParaValidar = formataTelefone(telefoneParaValidar);// formatando o telefone para colocar os
 																		// parenteses no DDD e o hifen no meio do numero
-			return (telefoneParaValidar.matches("^\\([1-9]{2}\\) 9[7-9]{1}[0-9]{3}\\-[0-9]{4}$"));
+			if (telefoneParaValidar.matches("^\\([1-9]{2}\\) 9[7-9]{1}[0-9]{3}\\-[0-9]{4}$")) {
+				return true;
+			} else {
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("O telefone informado é inválido"));
+				return false;
+			}
 		}
 		// o método matches, diz se uma String segue o padrão informado, que no caso é o
 		// padrão de telefone, com parênteses e o hifen "(xx) 9XXXX-XXXX"
 	}
 
-	public String formataTelefone(String telefoneParaFormatar) {
+	public static String formataTelefone(String telefoneParaFormatar) {
 		if (telefoneParaFormatar.length() < 7) {// se for menor q 7 não dá pra formatar
 			return "O Telefone: " + telefoneParaFormatar + "é inválido";
 		}
@@ -30,9 +38,13 @@ public class ValidaPessoa {
 		return String.valueOf(telefoneFormatado);
 	}
 
-	public boolean validaEmail(String email) {
-		return email.matches(
-				"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+	public static boolean validaEmail(String email) {
+		if (!email.matches(
+				"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("O Email informado é inválido"));
+			return false;
+		}
+		return true;
 	}
 
 	public static boolean validaCPF(String CPF) {
@@ -41,7 +53,8 @@ public class ValidaPessoa {
 				|| CPF.equals("33333333333") || CPF.equals("44444444444") || CPF.equals("55555555555")
 				|| CPF.equals("66666666666") || CPF.equals("77777777777") || CPF.equals("88888888888")
 				|| CPF.equals("99999999999") || (CPF.length() != 11)) {
-			return (false);
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("O CPF informado é inválido"));
+			return false;
 		}
 
 		char dig10, dig11;
@@ -80,7 +93,8 @@ public class ValidaPessoa {
 		if ((dig10 == CPF.charAt(9)) && (dig11 == CPF.charAt(10))) {
 			return (true);
 		} else {
-			return (false);
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("O CPF informado é inválido"));
+			return false;
 		}
 
 	}
@@ -106,7 +120,8 @@ public class ValidaPessoa {
 				|| CNPJ.equals("33333333333333") || CNPJ.equals("44444444444444") || CNPJ.equals("55555555555555")
 				|| CNPJ.equals("66666666666666") || CNPJ.equals("77777777777777") || CNPJ.equals("88888888888888")
 				|| CNPJ.equals("99999999999999") || (CNPJ.length() != 14)) {
-			return (false);
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("O CNPJ informado é inválido"));
+			return false;
 		}
 
 		char dig13, dig14;
@@ -159,7 +174,8 @@ public class ValidaPessoa {
 			if ((dig13 == CNPJ.charAt(12)) && (dig14 == CNPJ.charAt(13))) {
 				return (true);
 			} else {
-				return (false);
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("O CNPJ informado é inválido"));
+				return false;
 			}
 		} catch (InputMismatchException erro) {
 			return (false);

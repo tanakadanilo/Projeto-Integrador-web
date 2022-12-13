@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import br.com.amogus.dao.PessoaDao;
 import br.com.amogus.entidade.Pessoa;
+import br.com.amogus.validation.ValidaPessoa;
 
 @Component
 @SessionScoped
@@ -27,7 +28,9 @@ public class PessoaControl {
 	}
 
 	public void salvar() {
-		PessoaDao.save(Pessoa);
+		if (ValidaPessoa.validaCPF(Pessoa.getCpf()) && ValidaPessoa.validaTelefone(Pessoa.getTelefone())) {
+			PessoaDao.save(Pessoa);
+		}
 		Pessoa = new Pessoa();
 		listar();
 	}
@@ -75,7 +78,7 @@ public class PessoaControl {
 	}
 
 	public List<Pessoa> completeFuncionario(String nome) {
-		var lista =  PessoaDao.completePessoa("%" + nome + "%");
+		var lista = PessoaDao.completePessoa("%" + nome + "%");
 		return lista.stream().filter(p -> p.isFuncionario()).toList();
 	}
 

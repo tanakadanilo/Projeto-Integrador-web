@@ -59,4 +59,8 @@ public class MunicipioControl {
 		this.Municipios = Municipios;
 	}
 
+	public List<Municipio> completeMunicipio(String nome) {
+		return municipioDao.completeMunicipio("%" + nome + "%");
+	}
+
 }

@@ -17,13 +17,13 @@ public class PreencheBancoMunicipios {
 			throws FileNotFoundException, IOException, ClassNotFoundException, SQLException {
 
 		try (BufferedReader br = new BufferedReader(
-				new FileReader("src\\main\\java\\com\\example\\oficinaco\\jpa\\municipios.txt"))) {
+				new FileReader("src/main/java/br/com/amogus/jpa/municipios.txt"))) {
 
 			String linha = br.readLine();
 			String[] dados = new String[1];
 			Class.forName("org.postgresql.Driver");
 			Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres",
-					"123456");
+					"PASS@word123");
 
 			// Nome Municipio
 			// código IBGE

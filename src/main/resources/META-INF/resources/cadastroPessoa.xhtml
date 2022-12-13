@@ -10,6 +10,7 @@
 </h:head>
 <h:body>
 	<h:form id="form">
+		<p:messages />
 		<ui:include src="menu.xhtml" />
 
 		<p:commandButton value="Adicionar Pessoa" type="button"
@@ -36,7 +37,7 @@
 					<h:outputText value="#{pessoa.cep}" />
 				</p:column>
 				<p:column sortBy="#{pessoa.municipio}" headerText="Municipio">
-					<h:outputText value="#{pessoa.municipio}" />
+					<h:outputText value="#{pessoa.municipio.nome}" />
 				</p:column>
 
 				<p:column sortBy="#{pessoa.telefone}" headerText="Telefone">
@@ -67,6 +68,14 @@
 					<p:inputText value="#{pessoaControl.pessoa.nome}" />
 					<h:outputText value="CPF:" />
 					<p:inputText value="#{pessoaControl.pessoa.cpf}" />
+
+					<p:outputLabel value="Municipio:" />
+					<p:autoComplete id="municipio"
+						value="#{pessoaControl.pessoa.municipio}"
+						completeMethod="#{municipioControl.completeMunicipio}"
+						var="municipio" itemValue="#{municipio}"
+						itemLabel="#{municipio.nome}" style="width: 100%"
+						forceSelection="true" scrollHeight="250" converter="converter"></p:autoComplete>
 					<h:outputText value="Endereço:" />
 					<p:inputText value="#{pessoaControl.pessoa.endereco}" />
 					<h:outputText value="Bairro:" />
